@@ -11,7 +11,9 @@ export default class App extends React.Component {
       rounds: null,
       users: null,
       exercise: null,
-      currentUser: null
+      currentUser: null,
+      loggedIn: true,
+      //updateData: context.updateData.bind(context)
     }
   }
 
@@ -38,10 +40,14 @@ export default class App extends React.Component {
 
   render() {
 
-    // Passes all the DB information via states to all components
+    // Save state as new object so can add functions to pass down
+    var newState = this.state;
+    newState.updateData = this.updateData.bind(this);
+
+    //Passes all the DB information via states to all components
     var children = React.Children.map(this.props.children, function(child) {
-      return React.cloneElement(child, this.state)
-    }.bind(this))
+      return React.cloneElement(child, newState)
+    }.bind(this));
 
     return (
       <div>
