@@ -16,7 +16,7 @@ export default class NavigationBar extends React.Component {
           <Nav>
             <NavItem eventKey={1} href="#/user">Profile</NavItem>
             <NavItem eventKey={2} href="#/overview">Overview</NavItem>
-            <NavItem eventKey={3} href="#/exercise">Exercise!</NavItem>
+            <NavItem eventKey={3} href="#/exercise">Exercise</NavItem>
             <NavItem eventKey={4} href="#/admin">Admin Dashboard</NavItem>
             <NavItem eventKey={5} href="#/slack">Slack</NavItem>
           </Nav>
