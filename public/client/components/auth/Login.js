@@ -7,6 +7,7 @@ export default class Login extends React.Component {
     return (
       <div>
         <h1>Login Page Goes Here</h1>
+        <button onClick={this.props.authLogin}>Login</button>
       </div>
     )
 

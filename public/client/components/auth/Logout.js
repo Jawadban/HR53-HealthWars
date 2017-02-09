@@ -1,6 +1,13 @@
 import React from 'react';
 
 export default class Logout extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.authLogout();
+  }
 
   render() {
 

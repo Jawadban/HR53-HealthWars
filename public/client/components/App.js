@@ -12,8 +12,7 @@ export default class App extends React.Component {
       users: null,
       exercise: null,
       currentUser: null,
-      loggedIn: true,
-      //updateData: context.updateData.bind(context)
+      loggedIn: false,
     }
   }
 
@@ -38,11 +37,29 @@ export default class App extends React.Component {
     });
   }
 
+  authLogin () {
+    console.log('Login User');
+    this.setState(prevState => ({
+      loggedIn: true
+    }));
+    this.props.router.push('/');
+  }
+
+  authLogout () {
+    console.log('Logout User');
+    this.setState(prevState => ({
+      loggedIn: false
+    }));
+    this.props.router.push('/auth/login');
+  }
+
   render() {
 
     // Save state as new object so can add functions to pass down
     var newState = this.state;
     newState.updateData = this.updateData.bind(this);
+    newState.authLogin = this.authLogin.bind(this);
+    newState.authLogout = this.authLogout.bind(this);
 
     //Passes all the DB information via states to all components
     var children = React.Children.map(this.props.children, function(child) {
