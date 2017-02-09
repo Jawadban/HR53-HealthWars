@@ -46,3 +46,12 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     res.redirect('/#/overview');
   }
 });
+
+app.get('/logout', function (req, res) {
+  // passport attaches logout method to all requests
+  console.log('BLAAHHH req.body', req)
+  User.findById(req.body._id, function(err, user) {
+    console.log('USER HERE THERE EVERYWHERE', user);
+  });
+  res.redirect('/');
+});
