@@ -21,8 +21,7 @@ export default class NavigationBar extends React.Component {
             <NavItem eventKey={5} href="#/slack">Slack</NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#/auth/login">Login</NavItem>
-            <NavItem eventKey={1} href="#/auth/logout">Logout</NavItem>
+            <NavItem eventKey={1} onClick={this.props.authLogout}>Logout</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

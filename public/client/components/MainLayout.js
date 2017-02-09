@@ -28,7 +28,7 @@ export default class MainLayout extends React.Component {
 
     return (
       <div>
-        <NavigationBar />
+        <NavigationBar authLogout={this.props.authLogout} />
         {children}
       </div>
     )

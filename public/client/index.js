@@ -8,12 +8,9 @@ import UserView from './components/userView/UserView';
 import Overview from './components/overview/Overview';
 import Dashboard from './components/adminDashboard/Dashboard';
 import Slack from './components/slack/Slack';
-
 import MainLayout from './components/MainLayout';
 import AuthLayout from './components/AuthLayout';
-
 import Login from './components/auth/Login';
-import Logout from './components/auth/Logout';
   
 render((
   <Router history={hashHistory}>
@@ -29,7 +26,6 @@ render((
       <Route path="auth" component={AuthLayout}>
         <IndexRedirect to="login" />
         <Route path="login" component={Login}/>
-        <Route path="logout" component={Logout}/>
       </Route>
     </Route>
   </Router>
