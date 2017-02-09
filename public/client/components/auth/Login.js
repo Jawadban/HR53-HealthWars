@@ -10,6 +10,7 @@ export default class Login extends React.Component {
         <input id="authUserName" type="text" label="Username" placeholder="jfbriggs" onKeyUp={this.props.authUsernameChange} />
 
         <button onClick={this.props.authLogin}>Login</button>
+        <a href="/auth/facebook">Facebook Login</a>
       </div>
     )
 
