@@ -11,7 +11,8 @@ export default class App extends React.Component {
       rounds: null,
       users: null,
       exercise: null,
-      currentUser: null
+      currentUser: null,
+      loggedIn: false,
     }
   }
 
@@ -36,22 +37,37 @@ export default class App extends React.Component {
     });
   }
 
-  render() {
-    var context = this;
+  authLogin () {
+    console.log('Login User');
+    this.setState(prevState => ({
+      loggedIn: true
+    }));
+    this.props.router.push('/');
+  }
 
-    // Passes all the DB information via states to all components
+  authLogout () {
+    console.log('Logout User');
+    this.setState(prevState => ({
+      loggedIn: false
+    }));
+    this.props.router.push('/auth/login');
+  }
+
+  render() {
+
+    // Save state as new object so can add functions to pass down
+    var newState = this.state;
+    newState.updateData = this.updateData.bind(this);
+    newState.authLogin = this.authLogin.bind(this);
+    newState.authLogout = this.authLogout.bind(this);
+
+    //Passes all the DB information via states to all components
     var children = React.Children.map(this.props.children, function(child) {
-      return React.cloneElement(child, {
-        rounds: context.state.rounds,
-        users: context.state.users,
-        exercise: context.state.exercise,
-        currentUser: context.state.currentUser,
-        updateData: context.updateData.bind(context)
-      })
-    })
+      return React.cloneElement(child, newState)
+    }.bind(this));
+
     return (
       <div>
-        <NavigationBar />
         {children}
       </div>
     )
