@@ -37,21 +37,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    var context = this;
 
     // Passes all the DB information via states to all components
     var children = React.Children.map(this.props.children, function(child) {
-      return React.cloneElement(child, {
-        rounds: context.state.rounds,
-        users: context.state.users,
-        exercise: context.state.exercise,
-        currentUser: context.state.currentUser,
-        updateData: context.updateData.bind(context)
-      })
-    })
+      return React.cloneElement(child, this.state)
+    }.bind(this))
+
     return (
       <div>
-        <NavigationBar />
         {children}
       </div>
     )
