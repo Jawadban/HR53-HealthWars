@@ -182,3 +182,7 @@ table {
   padding-left: 10px;
   font-size: 24px;
 }
+
+label {
+  display: block;
+}
