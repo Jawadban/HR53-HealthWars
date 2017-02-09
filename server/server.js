@@ -31,3 +31,18 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//=========authentication route=========/
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  failureRedirect: "/"
+}), function (req, res) {
+  // passport attaches user information to all incoming requests
+  if (!req.user.goal) {
+    // if user has no goal, allow them to create one
+    res.redirect('/#/overview');
+  } else {
+    // else log user in and redirect to goal status page
+    res.redirect('/#/overview');
+  }
+});
