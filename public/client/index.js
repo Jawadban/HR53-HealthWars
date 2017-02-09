@@ -7,6 +7,7 @@ import LoggingExercise from './components/exercise/LoggingExercise';
 import UserView from './components/userView/UserView';
 import Overview from './components/overview/Overview';
 import Dashboard from './components/adminDashboard/Dashboard';
+import Slack from './components/slack/Slack';
   
 render((
   <Router history={hashHistory}>
@@ -16,6 +17,7 @@ render((
       <Route path="/overview" component={Overview}/>
       <Route path="/exercise" component={LoggingExercise}/>
       <Route path="/admin" component={Dashboard} />
+      <Route path="/slack" component={Slack} />
     </Route>
   </Router>
 ), document.getElementById('app'))
