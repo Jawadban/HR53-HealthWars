@@ -24,7 +24,7 @@ module.exports = function(passport) {
     });
   });
   
-  // pull in our info from keys.js
+ 
   // pull in our info from keys.js
   passport.use(new FacebookStrategy({
     clientID: Keys.facebook.clientID,
@@ -37,7 +37,7 @@ module.exports = function(passport) {
   function(token, refreshToken, profile, done) {
     console.log('PROFILE INFO RETURNED FROM FACEBOOK', profile);
     console.log('PROFILE DETAILS:  ', profile._json.friends.data)
-    // console.log("TOKEN RETURNED PASSPORT:  ", token)
+    console.log("TOKEN RETURNED PASSPORT:  ", token)
     
     process.nextTick(function() {
       // use facebook info to find matching user in our database
@@ -59,6 +59,7 @@ module.exports = function(passport) {
           // create new user if none is found
           
           var newUser = new User();
+          console.log('NEWUSER.FACEBOOK', newUser.facebook, token);
           newUser.facebook.token = token;
           newUser.facebook.id = profile.id;
           newUser.facebook.name = profile.displayName;
