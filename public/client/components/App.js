@@ -13,6 +13,7 @@ export default class App extends React.Component {
       exercise: null,
       currentUser: null,
       loggedIn: false,
+      auth_username: null
     }
   }
 
@@ -32,7 +33,15 @@ export default class App extends React.Component {
     axios.get('/api/exercises').then(function(res) {
       context.setState({exercise: res.data});
     });
-    axios.get('/api/users/jfbriggs').then(function(res) {
+
+    // If no username is set, use default
+    if (context.state.auth_username != null) {
+      var user = context.state.auth_username;
+    } else {
+      var user = 'jfbriggs'
+    }
+
+    axios.get('/api/users/' + user).then(function(res) {
       context.setState({currentUser: res.data});
     });
   }
@@ -42,6 +51,11 @@ export default class App extends React.Component {
     this.setState(prevState => ({
       loggedIn: true
     }));
+
+    axios.get('/api/users/' + this.state.auth_username).then(function(res) {
+      this.setState({currentUser: res.data});
+    }.bind(this));
+
     this.props.router.push('/');
   }
 
@@ -53,6 +67,13 @@ export default class App extends React.Component {
     this.props.router.push('/auth/login');
   }
 
+  authUsernameChange (event) {
+    this.setState({
+      auth_username: event.target.value
+    });
+    console.log('this.state.auth_username', this.state.auth_username);
+  }
+
   render() {
 
     // Save state as new object so can add functions to pass down
@@ -60,6 +81,7 @@ export default class App extends React.Component {
     newState.updateData = this.updateData.bind(this);
     newState.authLogin = this.authLogin.bind(this);
     newState.authLogout = this.authLogout.bind(this);
+    newState.authUsernameChange = this.authUsernameChange.bind(this);
 
     //Passes all the DB information via states to all components
     var children = React.Children.map(this.props.children, function(child) {
