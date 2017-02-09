@@ -13,3 +13,9 @@ app.listen(port, function() {
 });
 
 mongoose.connect('mongodb://localhost/healthwars');
+
+// parse requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
