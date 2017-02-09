@@ -22,4 +22,13 @@ module.exports = function(passport) {
       done(err, user);
     });
   });
+  
+  // pull in our info from keys.js
+  passport.use(new FacebookStrategy({
+    clientID: Keys.facebook.clientID,
+    clientSecret: Keys.facebook.clientSecret,
+    callbackURL: Keys.facebook.callbackURL,
+    profileFields: ['id', 'displayName', 'photos', 'email', 'friends'],
+    scope: ['user_friends', 'email']
+  }
 }
