@@ -13,4 +13,13 @@ module.exports = function(passport) {
     console.log('USER FROM SERIALIZE USER, ', user.facebook.id);
     done(null, user.facebook.id);
   });
+  
+  passport.deserializeUser(function(id, done) {
+    User.findOne({
+      'id': id
+    }, function(err, user) {
+      // console.log('USER FORM deserializeUSER', user);
+      done(err, user);
+    });
+  });
 }
