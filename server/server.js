@@ -37,6 +37,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: "/"
 }), function (req, res) {
+  console.log('req.user after fb authentication', req.user);
   // passport attaches user information to all incoming requests
   if (!req.user.goal) {
     // if user has no goal, allow them to create one
