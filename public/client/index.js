@@ -11,6 +11,7 @@ import Slack from './components/slack/Slack';
 import MainLayout from './components/MainLayout';
 import AuthLayout from './components/AuthLayout';
 import Login from './components/auth/Login';
+import Calendar from './components/calendar/Calendar';
   
 render((
   <Router history={hashHistory}>
@@ -22,6 +23,7 @@ render((
         <Route path="/exercise" component={LoggingExercise}/>
         <Route path="/admin" component={Dashboard} />
         <Route path="/slack" component={Slack} />
+        <Route path="/calendar" component={Calendar} />
       </Route>
       <Route path="auth" component={AuthLayout}>
         <IndexRedirect to="login" />
