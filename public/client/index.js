@@ -41,9 +41,9 @@ render((
 
 
 //write callback function to make asynchronous 
-var cb = function() {
-  console.log("I'm here to make requireAuth asynchronous!");
-};
+// var cb = function() {
+//   console.log("I'm here to make requireAuth asynchronous!");
+// };
 
 // function authenticate(next, replace, cb) {
 //   console.log(document.cookie);
