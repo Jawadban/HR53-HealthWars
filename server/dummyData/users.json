@@ -1,15 +1,9 @@
 [
   {
-    "name": "Franklin Jeng",
-    "username": "franklinjjeng",
-    "password": "ilovekitties01",
-    "team": "Engineering",
-    "scores": [
-      11,
-      4,
-      5,
-      6
-    ],
+    "name": "Bill Lea",
+    "username": "billylea",
+    "password": "asdf",
+    "team": "HR-53",
     "achievements": [
       "ach-badazz",
       "ach-winner-1"
@@ -19,13 +13,7 @@
     "name": "James Briggs",
     "username": "jfbriggs",
     "password": "cafelatte1115",
-    "team": "Engineering",
-    "scores": [
-      9,
-      16,
-      4,
-      8
-    ],
+    "team": "HR-53",
     "achievements": [
       "ach-badazz",
       "ach-winner-2"
@@ -35,13 +23,7 @@
     "name": "Greg Prouty",
     "username": "gprouty",
     "password": "meanmuggin515",
-    "team": "Design",
-    "scores": [
-      10,
-      9,
-      5,
-      11
-    ],
+    "team": "HR-53",
     "achievements": [
       "ach-badazz"
     ]
@@ -50,13 +32,27 @@
     "name": "Pat Sheehan",
     "username": "psheehan89",
     "password": "dopeashell0001",
-    "team": "Sales",
-    "scores": [
-      8,
-      10,
-      14,
-      4
-    ],
+    "team": "HR-53",
+    "achievements": [
+      "ach-badazz",
+      "ach-winner-3"
+    ]
+  },
+  {
+    "name": "John Doe",
+    "username": "jdoe",
+    "password": "asdf",
+    "team": "HR-52",
+    "achievements": [
+      "ach-badazz",
+      "ach-winner-3"
+    ]
+  },
+  {
+    "name": "Jack Smith",
+    "username": "jsmith",
+    "password": "asdf",
+    "team": "HR-52",
     "achievements": [
       "ach-badazz",
       "ach-winner-3"

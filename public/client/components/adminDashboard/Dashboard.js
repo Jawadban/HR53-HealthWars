@@ -14,6 +14,26 @@ export default class Dashboard extends React.Component {
     this.state = {};
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser !== null) {
+
+      // Variables to represent the current round & exercise via received props
+      var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
+      var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
+      var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
+
+      this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
+
+      // Get the unit measure for the current exercise
+      for (var i = 0; i < nextProps.exercise.length; i++) {
+        if (nextProps.exercise[i].name === currEx) {
+          this.setState({currentExUnit: nextProps.exercise[i].unit});
+          return;
+        }
+      }
+    }
+  }
+
   componentWillMount() {
     var context = this;
 
@@ -22,6 +42,7 @@ export default class Dashboard extends React.Component {
       context.setState({rounds: res.data});
       context.setState({currentRound: res.data[res.data.length - 1].name});
       context.setState({currentExercise: res.data[res.data.length - 1].exercise});
+      context.setState({currRoundId: res.data[res.data.length - 1]._id});
       // console.log(context.state);
     });
 
@@ -45,7 +66,7 @@ export default class Dashboard extends React.Component {
                 <p>Current Exercise: {this.state.currentExercise}</p>
               </div>
               <div>
-                <NewRound />
+                <NewRound updateData={this.props.updateData} />
                 <AddUser />
                 <AddExercise />
               </div>

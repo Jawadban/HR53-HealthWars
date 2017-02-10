@@ -56,9 +56,11 @@ export default class NewRound extends React.Component {
       context.refs.name.value = '';
       context.refs.exercise.value = '';
 
+      context.props.updateData();
+
       // add a new element to every user's scores array for the new round
-      axios.post('/api/users/newround');
-      console.log('Adding new round score value to all users!');
+      //axios.post('/api/users/newround');
+      //console.log('Adding new round score value to all users!');
     })
     .catch(function(err) {
       console.log(err);
