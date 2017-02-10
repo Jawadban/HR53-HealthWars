@@ -12,6 +12,8 @@ import MainLayout from './components/MainLayout';
 import AuthLayout from './components/AuthLayout';
 import Login from './components/auth/Login';
 import Calendar from './components/calendar/Calendar';
+import Logout from './components/auth/Logout';
+import axios from 'axios';
   
 function requireAuth() {
   console.log('PING!');
@@ -20,9 +22,9 @@ function requireAuth() {
 render((
   <Router history={hashHistory}>
     <Route component={App}>
-      <Route component={MainLayout} onEnter={requireAuth}>
-        <Route path="/" component={Overview}/>
-        <Route path="/user" component={UserView}/>
+      <Route component={MainLayout} onEnter={authenticate}>
+        <Route path="/" component={Overview} />  
+        <Route path="/user" component={UserView} />
         <Route path="/overview" component={Overview}/>
         <Route path="/exercise" component={LoggingExercise}/>
         <Route path="/admin" component={Dashboard} />
@@ -35,4 +37,47 @@ render((
       </Route>
     </Route>
   </Router>
-), document.getElementById('app'))
+), document.getElementById('app'));
+
+
+//write callback function to make asynchronous 
+var cb = function() {
+  console.log("I'm here to make requireAuth asynchronous!");
+};
+
+// function authenticate(next, replace, cb) {
+//   console.log(document.cookie);
+//   //check if document.cookie is there
+//   if (document.cookie) {
+//     //slice off 'token='
+//     var token = document.cookie.slice(6);
+//     axios.get('/users/auth', {
+//       headers: { token: token || null }
+//     })
+//     .then(function (res) {
+//       console.log(res);
+//       //res.data.user = user email
+//       //res.data.id = user id
+//       cb(); //used to exit the authenticate function, does nothing
+//     })
+//     .catch(function (err) {
+//       replace({
+//         // pathname: /*'/auth/signin',*/ //replace with valid pathname
+//         state: {
+//           nextPathName: next.location.pathname
+//         }
+//       });
+//       blah(); //does nothing!
+//     });
+//   }
+// }
+
+function authenticate() {
+  console.log('authenticate is called');
+  axios.get('/testing')
+  .then(function(res) {
+    console.log(res);
+  })
+}
+
+
