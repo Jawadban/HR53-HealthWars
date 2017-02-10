@@ -11,6 +11,10 @@ export default class Login extends React.Component {
 
         <button onClick={this.props.authLogin}>Login</button>
         <a href="/auth/facebook">Facebook Login</a>
+        <br/>
+        <a href="/test">Facebook call</a>
+        <br/>
+        <a href="/test2">THIS HEREEEEEE</a>
       </div>
     )
 
