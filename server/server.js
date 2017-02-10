@@ -45,18 +45,18 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 }), function (req, res) {
   console.log('req.user after fb authentication', req.user);
   // passport attaches user information to all incoming requests
-  // if (!req.user.goal) {
-  //   // if user has no goal, allow them to create one
-  //   res.redirect('/#/overview');
-  // } else {
-  //   // else log user in and redirect to goal status page
-  //   res.redirect('/#/overview');
-  // }
+  if (!req.user.goal) {
+    // if user has no goal, allow them to create one
+    res.redirect('/#/overview');
+  } else {
+    // else log user in and redirect to goal status page
+    res.redirect('/#/overview');
+  }
   //send cookie
   token = req.user.facebook.token;
   console.log('TOKEN WITHIN AUTH', token);
   res.cookie('token', token);
-  res.redirect('/facebooklogin');
+  //res.redirect('/facebooklogin');
 });
 
 app.get('/facebooklogin', function (req, res){
