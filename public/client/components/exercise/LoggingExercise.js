@@ -13,11 +13,13 @@ export default class LoggingExercise extends React.Component {
       units: 0,
       currentRound: null,
       currentExercise: null,
-      currRoundId: null
+      currRoundId: null,
+      value: 'Red'
     }
     this.unitChange = this.unitChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
     this.submitStar = this.submitStar.bind(this);
+    this.change = this.change.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,7 +91,7 @@ export default class LoggingExercise extends React.Component {
     console.log('SUBMIT STAR!');
     var context = this;
     for (var i = 0; i < this.state.units; i++){
-      axios.post('/api/stars/', {'color': 'silver', '_userId': context.props.currentUser._id, '_roundId': this.state.currRoundId}).then(function(res) {
+      axios.post('/api/stars/', {'color': context.state.value, '_userId': context.props.currentUser._id, '_roundId': this.state.currRoundId}).then(function(res) {
       console.log('STAR SUBMITTED!');
         axios.get('/api/stars/').then(function(res){
           console.log('RES', res.data[res.data.length-1]._userId.name);
@@ -99,6 +101,10 @@ export default class LoggingExercise extends React.Component {
     }
     this.setState({units: 0});
     this.props.updateData();
+  }
+
+  change(event) {
+    this.setState({value: event.target.value});
   }
 
   render() {
@@ -127,8 +133,20 @@ export default class LoggingExercise extends React.Component {
               <td><div className="unit-display">{ this.state.units }</div> </td>
               <td><ChangeUnits onClick={this.unitChange} type={'+'} /></td>
             </tr>
+            <tr>
+              <td colSpan="3">
+                <select className="form-control" onChange={this.change} value={this.state.value}>
+                  <option>Red</option>
+                  <option>Blue</option>
+                  <option>Green</option>
+                  <option>Yellow</option>
+                  <option>Gold</option>
+                </select>
+              </td>
+            </tr>
           </tbody>
         </table>
+        
         <div>
     
           <Link to={`/user`}><SubmitUnits onClick={this.submitStar} data={this.state.units} href="#/user" /></Link>

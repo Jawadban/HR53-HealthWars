@@ -13,7 +13,8 @@ export default class App extends React.Component {
       exercise: null,
       currentUser: null,
       loggedIn: false,
-      auth_username: null
+      auth_username: null,
+      userStars: null
     }
   }
 
@@ -43,7 +44,13 @@ export default class App extends React.Component {
 
     axios.get('/api/users/' + user).then(function(res) {
       context.setState({currentUser: res.data});
+      console.log('ID SENT:', res.data._id);
+      axios.get('/api/stars/user/' + res.data._id).then(function(res) {
+        context.setState({userStars: res.data});
+      });
     });
+
+
   }
 
   authLogin () {
@@ -55,6 +62,8 @@ export default class App extends React.Component {
     axios.get('/api/users/' + this.state.auth_username).then(function(res) {
       this.setState({currentUser: res.data});
     }.bind(this));
+
+    this.updateData();
 
     this.props.router.push('/');
   }

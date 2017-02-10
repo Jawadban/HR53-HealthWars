@@ -4,6 +4,7 @@ var Q = require('q');
 var createStar = Q.nbind(Star.create, Star);
 var findStars = Q.nbind(Star.find, Star);
 var populateStars = Q.nbind(Star.populate, Star);
+var findUserStars = Q.nbind(Star.find, Star);
 
 module.exports = {
 
@@ -29,6 +30,17 @@ module.exports = {
         res.json(stars);
       }
       next();
+    });
+  },
+
+  getUserStars : function(req, res, next) {
+    return findUserStars({_userId: req.params.user_id}).then(function(stars){
+      if(stars) {
+        res.json(stars);
+      }
+      next();
+    }).fail(function(err){
+      next(err);
     });
   },  
 
