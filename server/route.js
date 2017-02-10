@@ -26,6 +26,7 @@ app.use(express.static('public'));
 // Controller Dependencies
 
 var userController = require('./dbmodules/users/userController');
+var starController = require('./dbmodules/stars/starController');
 var roundController = require('./dbmodules/rounds/roundController');
 var exerciseController = require('./dbmodules/exercises/exerciseController');
 var achievementController = require('./dbmodules/achievement/achievementController');
@@ -50,6 +51,20 @@ app.post('/api/users/:username/scores', userController.updateScores);
 
 // Tell DB a new round has started: update all users' scores array
 app.post('/api/users/newround', userController.addRound);
+
+
+// === STAR ROUTING === 
+
+// Add a new star (see schema for fields)
+app.post('/api/stars', starController.newStar);
+
+// Get all stars
+app.get('/api/stars', starController.getStars);
+
+
+
+
+
 
 // === ACHIEVEMENT ROUTING ===
 

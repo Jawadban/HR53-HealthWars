@@ -13,10 +13,11 @@ export default class LoggingExercise extends React.Component {
       units: 0,
       currentRound: null,
       currentExercise: null,
-      currentExUnit: null
+      currRoundId: null
     }
     this.unitChange = this.unitChange.bind(this);
     this.submitClick = this.submitClick.bind(this);
+    this.submitStar = this.submitStar.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,8 +26,9 @@ export default class LoggingExercise extends React.Component {
       // Variables to represent the current round & exercise via received props
       var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
       var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
+      var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
 
-      this.setState({currentRound: currRound, currentExercise: currEx});
+      this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
 
       // Get the unit measure for the current exercise
       for (var i = 0; i < nextProps.exercise.length; i++) {
@@ -41,8 +43,9 @@ export default class LoggingExercise extends React.Component {
   componentDidMount() {
     if (this.props.currentUser !== null) {
       var currEx = this.props.rounds[this.props.rounds.length - 1].exercise;
+      var currRoundId = this.props.rounds[this.props.rounds.length - 1]._id;
       this.setState({currentRound: this.props.rounds[this.props.rounds.length - 1].name,
-                     currentExercise: currEx});
+                     currentExercise: currEx, currRoundId: currRoundId});
 
       // Get the unit measure for the current exercise
       for (var i = 0; i < this.props.exercise.length; i++) {
@@ -82,13 +85,29 @@ export default class LoggingExercise extends React.Component {
     this.props.updateData();
   }
 
+  submitStar() {
+    console.log('SUBMIT STAR!');
+    var context = this;
+    for (var i = 0; i < this.state.units; i++){
+      axios.post('/api/stars/', {'color': 'silver', '_userId': context.props.currentUser._id, '_roundId': this.state.currRoundId}).then(function(res) {
+      console.log('STAR SUBMITTED!');
+        axios.get('/api/stars/').then(function(res){
+          console.log('RES', res.data[res.data.length-1]._userId.name);
+          console.log('STAR ADDED', res.data[res.data.length-1].color);
+        });
+      });
+    }
+    this.setState({units: 0});
+    this.props.updateData();
+  }
+
   render() {
     return (
       <div className="text-center">
         <table className="exercise-info col-xs-offset-4 col-xs-6 text-left">
           <tbody>
             <tr>
-              <td>Current Round:</td>
+              <td onClick={this.submitStar}>Current Round:</td>
               <td>{this.state.currentRound}</td>
             </tr>
             <tr>
@@ -111,7 +130,9 @@ export default class LoggingExercise extends React.Component {
           </tbody>
         </table>
         <div>
-          <Link to={`/user`}><SubmitUnits onClick={this.submitClick} data={this.state.units} href="#/user" /></Link>
+    
+          <Link to={`/user`}><SubmitUnits onClick={this.submitStar} data={this.state.units} href="#/user" /></Link>
+    
         </div>
       </div>
     )

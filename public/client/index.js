@@ -13,10 +13,14 @@ import AuthLayout from './components/AuthLayout';
 import Login from './components/auth/Login';
 import Calendar from './components/calendar/Calendar';
   
+function requireAuth() {
+  console.log('PING!');
+}
+
 render((
   <Router history={hashHistory}>
     <Route component={App}>
-      <Route component={MainLayout}>
+      <Route component={MainLayout} onEnter={requireAuth}>
         <Route path="/" component={Overview}/>
         <Route path="/user" component={UserView}/>
         <Route path="/overview" component={Overview}/>
