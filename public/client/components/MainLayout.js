@@ -10,7 +10,7 @@ export default class MainLayout extends React.Component {
   }
 
   componentDidMount() {
-    this.protect();
+    //this.protect();
   }
 
   protect() {
