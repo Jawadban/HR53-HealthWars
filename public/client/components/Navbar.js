@@ -20,6 +20,7 @@ export default class NavigationBar extends React.Component {
             <NavItem eventKey={4} href="#/admin">Admin Dashboard</NavItem>
             <NavItem eventKey={5} href="#/slack">Slack</NavItem>
             <NavItem eventKey={6} href="#/calendar">Calendar</NavItem>
+            <NavItem eventKey={7} href="#/betting">Betting</NavItem>
           </Nav>
           <Nav pullRight>
             <NavItem eventKey={1} onClick={this.props.authLogout}>Logout</NavItem>
