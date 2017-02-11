@@ -3,6 +3,7 @@ import LoggingExercise from './exercise/LoggingExercise';
 import Overview from './overview/Overview.js';
 import NavigationBar from './Navbar';
 import axios from 'axios';
+import HashHistory from 'react-router';
 
 export default class App extends React.Component {
   constructor (props) {
@@ -69,12 +70,11 @@ export default class App extends React.Component {
   }
 
   authLogout () {
-    // console.log('Logout User');
-    // this.setState(prevState => ({
-    //   loggedIn: false
-    // }));
-    // this.props.router.push('/auth/login');
+    var context = this;
     axios.get('/logout').then(function(res) {
+      if (res.status === 200) {
+        context.props.router.push('/auth/login');
+      }
       console.log('user has been logged out');
     })
   }
