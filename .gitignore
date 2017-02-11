@@ -24,3 +24,6 @@ dist/
 node_modules/
 bower_components/
 *.log
+
+#private file for auth keys
+keys.js

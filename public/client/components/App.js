@@ -69,11 +69,14 @@ export default class App extends React.Component {
   }
 
   authLogout () {
-    console.log('Logout User');
-    this.setState(prevState => ({
-      loggedIn: false
-    }));
-    this.props.router.push('/auth/login');
+    // console.log('Logout User');
+    // this.setState(prevState => ({
+    //   loggedIn: false
+    // }));
+    // this.props.router.push('/auth/login');
+    axios.get('/logout').then(function(res) {
+      console.log('user has been logged out');
+    })
   }
 
   authUsernameChange (event) {
