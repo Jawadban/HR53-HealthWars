@@ -3,9 +3,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var request = require('request');
 var User = require('./dbmodules/users/userModel.js');
-var Keys = require('../keys.js');
-
-
 
 var port = process.env.PORT || 3000;
 
