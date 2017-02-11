@@ -11,16 +11,13 @@ module.exports = function(passport) {
   
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    //console.log('USER FROM SERIALIZE USER, ', user.facebook.id);
     done(null, user);
-    console.log('DONE FROM SERIALIZEUSER', done)
   });
   
   passport.deserializeUser(function(id, done) {
     User.findOne({
       'id': id
     }, function(err, user) {
-      // console.log('USER FORM deserializeUSER', user);
       done(err, user);
     });
   });
@@ -36,29 +33,17 @@ module.exports = function(passport) {
   },
   // facebook will send back the token and profile info
   function(token, refreshToken, profile, done) {
-    console.log('PROFILE INFO RETURNED FROM FACEBOOK', profile);
-    console.log('PROFILE DETAILS:  ', profile._json.friends.data)
-    console.log("TOKEN RETURNED PASSPORT:  ", token)
-    
     process.nextTick(function() {
       // use facebook info to find matching user in our database
       User.findOne({ 'facebook.id': profile.id }, function(err, user) {
-        // console.log('PROFILE.ID', profile.id)
-        // console.log('user', user);
-        // console.log('err', err);
-        // if there is an error, stop everything and return that
-        // ie an error connecting to the database
         if (err) {
           console.log('ERR IN GENERAL', err);
           return done(err);
         } 
         if (user) {
-          // pass user back to passport if found
-          console.log('USER FOUND IN DATABASE', user);
           return done(null, user);
         } else {
           // create new user if none is found
-          
           var newUser = new User();
           console.log('NEWUSER.FACEBOOK', newUser.facebook, token);
           newUser.facebook.token = token;
@@ -73,5 +58,3 @@ module.exports = function(passport) {
     });
   }));
 };
-
-console.log('required facebook`s authentication auth.js file');
