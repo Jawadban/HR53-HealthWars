@@ -32,6 +32,27 @@ module.exports = {
       next();
     });
   },
+  getStarsCount : function(req, res, next) {
+    Star
+    .aggregate([
+        {
+            $group: {
+                _id: '$_userId',  //$region is the column name in collection
+                count: {$sum: 1}
+            }
+        },
+        
+    ])
+    .exec(function (err, stars) {
+      if (err) return handleError(err);
+      console.log('STARS', stars);
+      if(stars) {
+        res.json(stars);
+      }
+      next();
+      
+    });
+  },
 
   getUserStars : function(req, res, next) {
     return findUserStars({_userId: req.params.user_id}).then(function(stars){

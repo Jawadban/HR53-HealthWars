@@ -61,6 +61,9 @@ app.post('/api/stars', starController.newStar);
 // Get all stars
 app.get('/api/stars', starController.getStars);
 
+// Get all stars
+app.get('/api/stars/count', starController.getStarsCount);
+
 // Get a single user's data (using Mongo ID)
 app.get('/api/stars/user/:user_id', starController.getUserStars);
 
