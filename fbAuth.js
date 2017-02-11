@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var User = require('./server/dbmodules/users/userModel.js');
 
 //load api keys
-var Keys = require('./keys.js');
+var Keys = require('./keys/facebook.js');
 
 module.exports = function(passport) {
   

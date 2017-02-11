@@ -59,7 +59,12 @@ export default class AddUser extends React.Component {
             <input className="form-control" type="text" name="name" placeholder="Name" ref="name" />
             <input className="form-control" type="text" name="username" placeholder="Username" ref="username" />
             <input className="form-control" type="text" name="password" placeholder="Password" ref="password" />
-            <input className="form-control" type="text" name="team" placeholder="Team" ref="team" />
+            <select className="form-control" name="team" ref="team">
+              <option>HR-52</option>
+              <option selected>HR-53</option>
+              <option>HR-72</option>
+              <option>HR-73</option>
+            </select>
             <button className="btn btn-primary admin-button" type="submit" value="Add User">Add User</button>
           </form><br />
         </div>
