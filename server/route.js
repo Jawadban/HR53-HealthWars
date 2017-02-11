@@ -31,26 +31,34 @@ var roundController = require('./dbmodules/rounds/roundController');
 var exerciseController = require('./dbmodules/exercises/exerciseController');
 var achievementController = require('./dbmodules/achievement/achievementController');
 
+var userControllerSQL = require('./dbmodules/users/userControllerSQL');
+
 // === USER ROUTING === (SESSIONS SHOULD STORE A USER'S '_id' VALUE FROM MONGO)
 
 // Get all users
 app.get('/api/users', userController.getUsers);
+app.get('/api/users2', userControllerSQL.getUsers);
 
 // Add a new user (see schema for fields)
 app.post('/api/users', userController.newUser);
+app.post('/api/users2', userControllerSQL.newUser);
 
 // Add an achievement to a user
 app.post('/api/users/:username/achievements', userController.addAchievement);
+//app.post('/api/users2/:username/achievements', userController.addAchievement);
 
 // Get a single user's data (using Mongo ID)
 app.get('/api/users/:username', userController.getUser);
+app.get('/api/users2/:username', userControllerSQL.getUser);
 
 // Update a user's scores (requres the entire edited array be sent through in request)
 // Scores array, pre-edit, can be acquired via getting a single user's full data (see above route)
 app.post('/api/users/:username/scores', userController.updateScores);
+//app.post('/api/users2/:username/scores', userControllerSQL.updateScores);
 
 // Tell DB a new round has started: update all users' scores array
 app.post('/api/users/newround', userController.addRound);
+//app.post('/api/users2/newround', userControllerSQL.addRound);
 
 
 // === STAR ROUTING === 

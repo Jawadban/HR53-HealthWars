@@ -1,20 +1,3 @@
-// var execsql = require('execsql'),
-//     dbConfig = {
-//         host: 'localhost',
-//         user: 'root',
-//         password: ''
-//     },
-//     sql = 'use healthwars2;',
-//     sqlFile = __dirname + '/healthwars.sql';
-// execsql.config(dbConfig)
-//     .exec(sql)
-//     .execFile(sqlFile, function(err, results){
-//         if (err) {
-//             console.log('DATABASE SETUP ERR', err);
-//         } else {
-//             console.log('DATABASE SETUP', results);
-//         }
-//     });
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -22,7 +5,7 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '',
-    database : 'healthwars2'
+    database : 'healthwars'
 });
 
  
@@ -66,9 +49,9 @@ var sql = [
     "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (2,'Bill Lea','billylea',2);",
     "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (3,'Max Quinn','maxquinn',2);",
     "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (4,'Abiy Melaku','abiymelaku',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (5,'Bill Lea','billylea',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (6,'Max Quinn','maxquinn',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (7,'Abiy Melaku','abiymelaku',2);",
+    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (5,'John Smith','jsmith',1);",
+    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (6,'Sally Beck','sbeck',3);",
+    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (7,'Jane Johnson','jjohnson',4);",
 
     // add data - teams
     "INSERT INTO `teams` (`name`) VALUES ('HR-52');",
