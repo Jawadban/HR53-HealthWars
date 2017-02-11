@@ -11,8 +11,9 @@ module.exports = function(passport) {
   
   // used to serialize the user for the session
   passport.serializeUser(function(user, done) {
-    console.log('USER FROM SERIALIZE USER, ', user.facebook.id);
-    done(null, user.facebook.id);
+    //console.log('USER FROM SERIALIZE USER, ', user.facebook.id);
+    done(null, user);
+    console.log('DONE FROM SERIALIZEUSER', done)
   });
   
   passport.deserializeUser(function(id, done) {

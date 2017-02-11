@@ -12,7 +12,6 @@ import MainLayout from './components/MainLayout';
 import AuthLayout from './components/AuthLayout';
 import Login from './components/auth/Login';
 import Calendar from './components/calendar/Calendar';
-import Logout from './components/auth/Logout';
 import axios from 'axios';
   
 function requireAuth() {

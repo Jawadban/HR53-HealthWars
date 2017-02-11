@@ -55,7 +55,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   //send cookie
   token = req.user.facebook.token;
   console.log('TOKEN WITHIN AUTH', token);
-  res.cookie('token', token);
+  //res.cookie('token', token);
   //res.redirect('/facebooklogin');
 });
 
@@ -110,7 +110,8 @@ app.get('/testing', isLoggedIn, function(req, res) {
 
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
-    if (req.isAuthenticated())
+    console.log('IS LOGGED IN');
+    if (req.isAuthenticated()) 
         return next();
     // if they aren't redirect them to the home page
     res.redirect('/auth/login');
