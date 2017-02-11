@@ -3,6 +3,7 @@ import LoggingExercise from './exercise/LoggingExercise';
 import Overview from './overview/Overview.js';
 import NavigationBar from './Navbar';
 import axios from 'axios';
+import HashHistory from 'react-router';
 
 export default class App extends React.Component {
   constructor (props) {
@@ -69,12 +70,22 @@ export default class App extends React.Component {
   }
 
   authLogout () {
+    console.log('ARGS FROM AUTHLOGOUT', arguments);
+    console.log('OUTSIDE THIS  ', this);
+    var context = this;
     // console.log('Logout User');
     // this.setState(prevState => ({
     //   loggedIn: false
     // }));
     // this.props.router.push('/auth/login');
     axios.get('/logout').then(function(res) {
+      console.log('ARGUMENTS INSIDE AXIOS,  ', arguments);
+      console.log('THIS INSIDE  ', this);
+      console.log('res.status', res.status);
+      
+      if (res.status === 200) {
+        context.props.router.push('/auth/login');
+      }
       console.log('user has been logged out');
     })
   }
