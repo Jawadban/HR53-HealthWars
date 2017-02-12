@@ -9,7 +9,7 @@ export default class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      rounds: null,
+      rounds: [],
       users: null,
       exercise: null,
       currentUser: null,

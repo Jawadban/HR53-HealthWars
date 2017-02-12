@@ -20,6 +20,25 @@ module.exports = {
     });
   },
 
+  // Create new user from admin form
+  newUserAdmin : function(req, res, next) {
+    var sql = `insert into users values (null, '${req.body.name}', '${req.body.username}', '${req.body.id_teams}', null, null)`;
+    console.log(sql);
+    return mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+    }).then(function(conn){
+        connection = conn;
+        return connection.query(sql);
+    }).then(function(rows){
+        console.log(rows);
+        res.json(rows);
+        
+    });
+  },
+
   getUsers : function(req, res, next) {
     return mysql.createConnection({
         host: 'localhost',
@@ -53,6 +72,19 @@ module.exports = {
     });
   },
 
-
+  getTeams : function(req, res, next) {
+    return mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+    }).then(function(conn){
+        connection = conn;
+        return connection.query('select * from teams');
+    }).then(function(rows){
+        res.json(rows);
+        
+    });
+  },
 
 };

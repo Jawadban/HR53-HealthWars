@@ -13,39 +13,51 @@ export default class Dashboard extends React.Component {
 
     this.state = {
       exercises: [],
+      teams: []
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser !== null) {
-      var current = this.props.rounds[this.props.rounds.length - 1];
-      this.setState({
-        currentRound: current.name,
-        currentExercise: current.exercise_name, 
-        currRoundId: current.id,
-        currentExUnit: current.unit
-      });
+      if (this.props.rounds.length > 0) {
+        var current = this.props.rounds[this.props.rounds.length - 1];
+        this.setState({
+          currentRound: current.name,
+          currentExercise: current.exercise_name, 
+          currRoundId: current.id,
+          currentExUnit: current.unit
+        });
+      }
     }
   }
 
   componentWillMount() {
     if (this.props.currentUser !== null) {
-      var current = this.props.rounds[this.props.rounds.length - 1];
-      this.setState({
-        currentRound: current.name,
-        currentExercise: current.exercise_name, 
-        currRoundId: current.id,
-        currentExUnit: current.unit,
-      });
-    
+      if (this.props.rounds.length > 0) {
+        var current = this.props.rounds[this.props.rounds.length - 1];
+        this.setState({
+          currentRound: current.name,
+          currentExercise: current.exercise_name, 
+          currRoundId: current.id,
+          currentExUnit: current.unit,
+        });
+      }
     }
     this.getExercises();
+    this.getTeams();
   }
 
   getExercises() {
     var context = this;
     axios.get('/api/exercises').then(function(res) {
       context.setState({exercises: res.data});
+    });
+  }
+
+  getTeams() {
+    var context = this;
+    axios.get('/api/teams').then(function(res) {
+      context.setState({teams: res.data});
     });
   }
 
@@ -62,7 +74,7 @@ export default class Dashboard extends React.Component {
               </div>
               <div>
                 <NewRound updateData={this.props.updateData} exercises={this.state.exercises} />
-                
+                <AddUser teams={this.state.teams} />
               </div>
             </div>
           </div>
@@ -72,7 +84,7 @@ export default class Dashboard extends React.Component {
 }
 
 
-//<AddUser />
+//
 //<AddExercise />
 
         
