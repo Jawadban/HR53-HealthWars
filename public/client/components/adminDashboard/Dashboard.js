@@ -75,6 +75,7 @@ export default class Dashboard extends React.Component {
               <div>
                 <NewRound updateData={this.props.updateData} exercises={this.state.exercises} />
                 <AddUser teams={this.state.teams} />
+                <AddExercise />
               </div>
             </div>
           </div>
@@ -83,8 +84,5 @@ export default class Dashboard extends React.Component {
   }
 }
 
-
-//
-//<AddExercise />
 
         

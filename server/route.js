@@ -115,7 +115,8 @@ app.post('/api/rounds', roundControllerSQL.newRound);
 app.get('/api/exercises', exerciseControllerSQL.getExercises);
 
 // Create a new exercise (see schema for necessary fields)
-app.post('/api/exercises', exerciseController.newExercise);
+//app.post('/api/exercises', exerciseController.newExercise);
+app.post('/api/exercises', exerciseControllerSQL.newExercise);
 
 
 app.post('/submitUnits', function(req, res) {
