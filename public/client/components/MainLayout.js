@@ -9,14 +9,16 @@ export default class MainLayout extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    //this.protect();
+  componentWillReceiveProps() {
+    this.protect();
   }
-
+  
   protect() {
-    if (!this.props.loggedIn) {
+    console.log('PROPS IN PROTECT', this.props);
+    console.log('document.cookie', document.cookie.slice(6));
+    if (!document.cookie.slice(6)) {
       console.log('WE MUST PROTECT THIS HOUSE!');
-      this.props.router.push('/auth/login');
+      hashHistory.push('/auth/login');
     }
   }
 
