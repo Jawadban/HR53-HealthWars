@@ -25,28 +25,40 @@ export default class App extends React.Component {
   }
 
   updateData () {
+
+    document.cookie = 'olfsk' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = 'hblid' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    var token = readCookie('token');
+
     var context = this;
-    axios.get('/api/rounds').then(function(res) {
+    axios.get('/api/rounds2').then(function(res) {
       context.setState({rounds: res.data});
-    });
-    axios.get('/api/users').then(function(res) {
-      context.setState({users: res.data});
-    });
-    axios.get('/api/exercises').then(function(res) {
-      context.setState({exercise: res.data});
     });
 
     // If no username is set, use default
-    if (context.state.auth_username != null) {
-      var user = context.state.auth_username;
+    if (token !== undefined) {
+      var user = token;
     } else {
-      var user = 'jfbriggs'
+      var user = 2;
+      console.log('ERROR, DEFAULT USER USED.');
     }
 
-    axios.get('/api/users/' + user).then(function(res) {
+    console.log('COOKIE', token);
+
+    axios.get('/api/users2/' + user).then(function(res) {
       context.setState({currentUser: res.data});
-      console.log('ID SENT:', res.data._id);
-      axios.get('/api/stars/user/' + res.data._id).then(function(res) {
+      console.log('ID SENT:', res.data.id);
+      axios.get('/api/stars2/user/' + res.data.id).then(function(res) {
         context.setState({userStars: res.data});
       });
     });
@@ -73,6 +85,7 @@ export default class App extends React.Component {
     var context = this;
     axios.get('/logout').then(function(res) {
       if (res.status === 200) {
+        document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         context.props.router.push('/auth/login');
       }
       console.log('user has been logged out');

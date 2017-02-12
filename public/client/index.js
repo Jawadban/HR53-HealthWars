@@ -14,10 +14,6 @@ import Login from './components/auth/Login';
 import Calendar from './components/calendar/Calendar';
 import axios from 'axios';
   
-function requireAuth() {
-  console.log('PING!');
-}
-
 render((
   <Router history={hashHistory}>
     <Route component={App}>
@@ -38,38 +34,6 @@ render((
   </Router>
 ), document.getElementById('app'));
 
-
-//write callback function to make asynchronous 
-// var cb = function() {
-//   console.log("I'm here to make requireAuth asynchronous!");
-// };
-
-// function authenticate(next, replace, cb) {
-//   console.log(document.cookie);
-//   //check if document.cookie is there
-//   if (document.cookie) {
-//     //slice off 'token='
-//     var token = document.cookie.slice(6);
-//     axios.get('/users/auth', {
-//       headers: { token: token || null }
-//     })
-//     .then(function (res) {
-//       console.log(res);
-//       //res.data.user = user email
-//       //res.data.id = user id
-//       cb(); //used to exit the authenticate function, does nothing
-//     })
-//     .catch(function (err) {
-//       replace({
-//         // pathname: /*'/auth/signin',*/ //replace with valid pathname
-//         state: {
-//           nextPathName: next.location.pathname
-//         }
-//       });
-//       blah(); //does nothing!
-//     });
-//   }
-// }
 
 function authenticate() {
   console.log('authenticate is called');

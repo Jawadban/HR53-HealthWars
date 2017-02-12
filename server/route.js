@@ -32,7 +32,8 @@ var exerciseController = require('./dbmodules/exercises/exerciseController');
 var achievementController = require('./dbmodules/achievement/achievementController');
 
 var userControllerSQL = require('./dbmodules/users/userControllerSQL');
-
+var roundControllerSQL = require('./dbmodules/rounds/roundControllerSQL');
+var starControllerSQL = require('./dbmodules/stars/starControllerSQL');
 // === USER ROUTING === (SESSIONS SHOULD STORE A USER'S '_id' VALUE FROM MONGO)
 
 // Get all users
@@ -49,7 +50,7 @@ app.post('/api/users/:username/achievements', userController.addAchievement);
 
 // Get a single user's data (using Mongo ID)
 app.get('/api/users/:username', userController.getUser);
-app.get('/api/users2/:username', userControllerSQL.getUser);
+app.get('/api/users2/:id', userControllerSQL.getUser);
 
 // Update a user's scores (requres the entire edited array be sent through in request)
 // Scores array, pre-edit, can be acquired via getting a single user's full data (see above route)
@@ -74,8 +75,9 @@ app.post('/api/users/newround', userController.addRound);
 
 // Get a single user's data (using Mongo ID)
 //app.get('/api/stars/user/:user_id', starController.getUserStars);
+app.get('/api/stars2/user/:id', starControllerSQL.getUserStars);
 
-app.get('/api/stars/mysql', starController.getStarsMYSQL);
+//app.get('/api/stars/mysql', starController.getStarsMYSQL);
 
 
 
@@ -95,6 +97,7 @@ app.post('/api/achievements', achievementController.newAchievement);
 
 // Get all rounds data existing in DB
 app.get('/api/rounds', roundController.getRounds);
+app.get('/api/rounds2', roundControllerSQL.getRounds);
 
 // Add data for a new round (see schema)
 app.post('/api/rounds', roundController.newRound);
