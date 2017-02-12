@@ -34,6 +34,7 @@ var achievementController = require('./dbmodules/achievement/achievementControll
 var userControllerSQL = require('./dbmodules/users/userControllerSQL');
 var roundControllerSQL = require('./dbmodules/rounds/roundControllerSQL');
 var starControllerSQL = require('./dbmodules/stars/starControllerSQL');
+var exerciseControllerSQL = require('./dbmodules/exercises/exerciseControllerSQL');
 // === USER ROUTING === (SESSIONS SHOULD STORE A USER'S '_id' VALUE FROM MONGO)
 
 // Get all users
@@ -43,6 +44,7 @@ app.get('/api/users2', userControllerSQL.getUsers);
 // Add a new user (see schema for fields)
 app.post('/api/users', userController.newUser);
 app.post('/api/users2', userControllerSQL.newUser);
+app.post('/api/users/admin', userControllerSQL.newUserAdmin);
 
 // Add an achievement to a user
 app.post('/api/users/:username/achievements', userController.addAchievement);
@@ -61,6 +63,9 @@ app.post('/api/users/:username/scores', userController.updateScores);
 app.post('/api/users/newround', userController.addRound);
 //app.post('/api/users2/newround', userControllerSQL.addRound);
 
+// === TEAM ROUTING === 
+// for now lives in user controller
+app.get('/api/teams', userControllerSQL.getTeams);
 
 // === STAR ROUTING === 
 
@@ -101,15 +106,17 @@ app.get('/api/rounds', roundController.getRounds);
 app.get('/api/rounds2', roundControllerSQL.getRounds);
 
 // Add data for a new round (see schema)
-app.post('/api/rounds', roundController.newRound);
+app.post('/api/rounds', roundControllerSQL.newRound);
 
 // === EXERCISE ROUTING ===
 
 // Get all available exercises from DB
-app.get('/api/exercises', exerciseController.getExercises);
+//app.get('/api/exercises', exerciseController.getExercises);
+app.get('/api/exercises', exerciseControllerSQL.getExercises);
 
 // Create a new exercise (see schema for necessary fields)
-app.post('/api/exercises', exerciseController.newExercise);
+//app.post('/api/exercises', exerciseController.newExercise);
+app.post('/api/exercises', exerciseControllerSQL.newExercise);
 
 
 app.post('/submitUnits', function(req, res) {
