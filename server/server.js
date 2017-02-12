@@ -37,8 +37,10 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   failureRedirect: "/"
 }), function (req, res) {
-  //console.log('req.user after fb authentication', req.user);
-  // passport attaches user information to all incoming requests
+
+  token = req.user;
+  res.cookie('token', token);
+
   if (!req.user.goal) {
     // if user has no goal, allow them to create one
     res.redirect('/#/overview');
@@ -46,11 +48,6 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     // else log user in and redirect to goal status page
     res.redirect('/#/overview');
   }
-  //send cookie
-  token = req.user.facebook.token;
-  //console.log('TOKEN WITHIN AUTH', token);
-  //res.cookie('token', token);
-  //res.redirect('/facebooklogin');
 });
 
 app.get('/facebooklogin', function (req, res){
@@ -61,7 +58,9 @@ app.get('/facebooklogin', function (req, res){
 app.get('/logout', function (req, res) {
   // passport attaches logout method to all requests
   console.log('THIS IS BEING CALLED');
+
   req.logout();
+  res.redirect('/');
 });
 
 

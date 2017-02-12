@@ -1,5 +1,4 @@
 var mysql = require('promise-mysql');
-//var Promises = require('bluebird');
 var connection;
 
 module.exports = {
@@ -29,18 +28,15 @@ module.exports = {
         database: 'healthwars'
     }).then(function(conn){
         connection = conn;
-  
         return connection.query('select * from users');
     }).then(function(rows){
-        // Logs out a list of hobbits 
-        console.log(rows);
         res.json(rows);
         
     });
   },
   
   getUser : function(req, res, next) {
-    var sql = `select * from users where username = '${req.params.username}'`;
+    var sql = `select u.id, u.name, u.username, t.name as team from users u inner join teams t on t.id = u.id_teams where u.id = '${req.params.id}'`;
     console.log('sql', sql);
     return mysql.createConnection({
         host: 'localhost',
@@ -52,7 +48,7 @@ module.exports = {
         return connection.query(sql);
     }).then(function(rows){
         console.log(rows);
-        res.json(rows);
+        res.json(rows[0]);
         
     });
   },

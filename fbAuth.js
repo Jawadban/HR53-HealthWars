@@ -1,5 +1,7 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
+var mysql = require('promise-mysql');
+var connection;
 
 //load user model
 var User = require('./server/dbmodules/users/userModel.js');
@@ -15,11 +17,29 @@ module.exports = function(passport) {
   });
   
   passport.deserializeUser(function(id, done) {
-    User.findOne({
-      'id': id
-    }, function(err, user) {
-      done(err, user);
+
+    console.log('ID: ', id);
+
+    var sql = `select * from users where id = '${id}'`;
+    
+    mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+    }).then(function(conn){
+        connection = conn;
+        return connection.query(sql);
+    }).then(function(rows){
+        console.log('FACEBOOK!', rows);
+        done(null, rows[0]);
+    }).catch(function(e) {
+    //Catch any unexpected errors
+      done(e, null);
     });
+
+
+
   });
   
  
@@ -34,27 +54,48 @@ module.exports = function(passport) {
   // facebook will send back the token and profile info
   function(token, refreshToken, profile, done) {
     process.nextTick(function() {
-      // use facebook info to find matching user in our database
-      User.findOne({ 'facebook.id': profile.id }, function(err, user) {
-        if (err) {
-          console.log('ERR IN GENERAL', err);
-          return done(err);
-        } 
-        if (user) {
-          return done(null, user);
-        } else {
-          // create new user if none is found
-          var newUser = new User();
-          console.log('NEWUSER.FACEBOOK', newUser.facebook, token);
-          newUser.facebook.token = token;
-          newUser.facebook.id = profile.id;
-          newUser.facebook.name = profile.displayName;
-          // pass new user back to passport after saving to database
-          newUser.save(function (err) {
-            return err ? done(err) : done(null, newUser);
-          });
-        }
-      })
+
+      var sql = `select * from users where facebook_id = '${profile.id}'`;
+      mysql.createConnection({
+          host: 'localhost',
+          user: 'root',
+          password: '',
+          database: 'healthwars'
+      }).then(function(conn){
+          connection = conn;
+          return connection.query(sql);
+      }).then(function(rows){
+
+          // if matching record
+          if (rows[0]) {
+            return done(null, rows[0].id);
+          } else {
+            var sql2 = `insert into users values (null, '${profile.displayName}', 'username', 3, '${profile.id}', '${token}')`;
+
+            mysql.createConnection({
+                host: 'localhost',
+                user: 'root',
+                password: '',
+                database: 'healthwars'
+            }).then(function(conn){
+                connection = conn;
+                return connection.query(sql2);
+            }).then(function(rows){
+              console.log('ROWS FB', rows.insertId);
+              return done(null, rows.insertId);
+            });
+
+
+          }
+
+      }).catch(function(e) {
+      //Catch any unexpected errors
+        done(e, null);
+      });
+
+
+
     });
   }));
+
 };

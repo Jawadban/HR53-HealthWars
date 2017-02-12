@@ -17,7 +17,7 @@ var sql = [
 
     // users
     "DROP TABLE IF EXISTS `users`;",
-    "CREATE TABLE `users` (`id` INTEGER AUTO_INCREMENT,`name` VARCHAR(100) NULL DEFAULT NULL,`username` VARCHAR(100) NULL DEFAULT NULL,`id_teams` INTEGER NULL DEFAULT NULL, PRIMARY KEY (`id`));",
+    "CREATE TABLE `users` ( `id` int(11) NOT NULL AUTO_INCREMENT, `name` varchar(100) DEFAULT NULL, `username` varchar(100) DEFAULT NULL, `id_teams` int(11) DEFAULT NULL, `facebook_id` varchar(255) DEFAULT NULL, `facebook_token` varchar(255) DEFAULT NULL, PRIMARY KEY (`id`), KEY `id_teams` (`id_teams`), CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_teams`) REFERENCES `teams` (`id`) ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;",
 
     // stars
     "DROP TABLE IF EXISTS `stars`; CREATE TABLE `stars` ( `id` int(11) NOT NULL AUTO_INCREMENT, `color` varchar(100) DEFAULT NULL, `id_users` int(11) DEFAULT NULL, `id_competition` int(11) DEFAULT NULL, PRIMARY KEY (`id`), KEY `id_users` (`id_users`), KEY `id_competition` (`id_competition`), CONSTRAINT `stars_ibfk_1` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`), CONSTRAINT `stars_ibfk_2` FOREIGN KEY (`id_competition`) REFERENCES `competition` (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; ",
@@ -46,12 +46,12 @@ var sql = [
     "ALTER TABLE `users_achievements` ADD FOREIGN KEY (id_achievements) REFERENCES `achievements` (`id`);",
 
     // add data - users
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (2,'Bill Lea','billylea',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (3,'Max Quinn','maxquinn',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (4,'Abiy Melaku','abiymelaku',2);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (5,'John Smith','jsmith',1);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (6,'Sally Beck','sbeck',3);",
-    "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (7,'Jane Johnson','jjohnson',4);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (2,'Bill Lea','billylea',2);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (3,'Max Quinn','maxquinn',2);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (4,'Abiy Melaku','abiymelaku',2);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (5,'John Smith','jsmith',1);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (6,'Sally Beck','sbeck',3);",
+    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (7,'Jane Johnson','jjohnson',4);",
 
     // add data - teams
     "INSERT INTO `teams` (`name`) VALUES ('HR-52');",
