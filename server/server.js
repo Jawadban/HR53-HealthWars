@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var request = require('request');
 var User = require('./dbmodules/users/userModel.js');
+var usrSql = require('./dbmodules/users/userControllerSQL.js');
 
 var port = process.env.PORT || 3000;
 
@@ -69,6 +70,8 @@ app.get('/testing', isLoggedIn, function(req, res) {
 
 app.post('/betting', function(req, res) {
   console.log(req.body);
+  var winner = req.body.winner;
+
   res.send('Posted data!');
 });
 

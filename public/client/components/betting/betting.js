@@ -3,13 +3,15 @@ import $ from 'jquery';
 
 export default class Betting extends React.Component {
 
-  constructor() {
+  constructor(props) {
     super();
+    console.log(props);
     this.state = {
       numStars: 0,
       username: '',
       description: '',
-      winner: ''
+      winner: '',
+      currUser: props.currentUser.username
     };
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleStarsChange = this.handleStarsChange.bind(this);
