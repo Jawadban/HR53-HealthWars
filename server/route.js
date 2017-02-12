@@ -34,6 +34,7 @@ var achievementController = require('./dbmodules/achievement/achievementControll
 var userControllerSQL = require('./dbmodules/users/userControllerSQL');
 var roundControllerSQL = require('./dbmodules/rounds/roundControllerSQL');
 var starControllerSQL = require('./dbmodules/stars/starControllerSQL');
+var exerciseControllerSQL = require('./dbmodules/exercises/exerciseControllerSQL');
 // === USER ROUTING === (SESSIONS SHOULD STORE A USER'S '_id' VALUE FROM MONGO)
 
 // Get all users
@@ -101,12 +102,13 @@ app.get('/api/rounds', roundController.getRounds);
 app.get('/api/rounds2', roundControllerSQL.getRounds);
 
 // Add data for a new round (see schema)
-app.post('/api/rounds', roundController.newRound);
+app.post('/api/rounds', roundControllerSQL.newRound);
 
 // === EXERCISE ROUTING ===
 
 // Get all available exercises from DB
-app.get('/api/exercises', exerciseController.getExercises);
+//app.get('/api/exercises', exerciseController.getExercises);
+app.get('/api/exercises', exerciseControllerSQL.getExercises);
 
 // Create a new exercise (see schema for necessary fields)
 app.post('/api/exercises', exerciseController.newExercise);

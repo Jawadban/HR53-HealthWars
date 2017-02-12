@@ -4,13 +4,21 @@ var connection;
 
 module.exports = {
   newRound : function(req, res, next) {
-    return createRound(req.body).then(function(round) {
-      if (round) {
-        res.json(round);
-      } 
-      next();
-    }).fail(function(err){
-      next(err);
+    return mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+    }).then(function(conn){
+        connection = conn;
+        console.log('BODY', req.body);
+        var sql = `insert into competition values (null, '${req.body.name}', ${req.body.id_exercises}, null, null)`;
+        console.log('insert competition sql: ', sql);
+        return connection.query(sql);
+    }).then(function(rows){
+        console.log(rows);
+        res.json(rows);
+        
     });
   },
 

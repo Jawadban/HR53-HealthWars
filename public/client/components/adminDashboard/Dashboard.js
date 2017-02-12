@@ -11,47 +11,42 @@ export default class Dashboard extends React.Component {
 
     super();
 
-    this.state = {};
+    this.state = {
+      exercises: [],
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser !== null) {
-
-      // Variables to represent the current round & exercise via received props
-      var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
-      var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
-      var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
-
-      this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
-
-      // Get the unit measure for the current exercise
-      for (var i = 0; i < nextProps.exercise.length; i++) {
-        if (nextProps.exercise[i].name === currEx) {
-          this.setState({currentExUnit: nextProps.exercise[i].unit});
-          return;
-        }
-      }
+      var current = this.props.rounds[this.props.rounds.length - 1];
+      this.setState({
+        currentRound: current.name,
+        currentExercise: current.exercise_name, 
+        currRoundId: current.id,
+        currentExUnit: current.unit
+      });
     }
   }
 
   componentWillMount() {
+    if (this.props.currentUser !== null) {
+      var current = this.props.rounds[this.props.rounds.length - 1];
+      this.setState({
+        currentRound: current.name,
+        currentExercise: current.exercise_name, 
+        currRoundId: current.id,
+        currentExUnit: current.unit,
+      });
+    
+    }
+    this.getExercises();
+  }
+
+  getExercises() {
     var context = this;
-
-    // Get existing rounds data
-    axios.get('/api/rounds').then(function(res) {
-      context.setState({rounds: res.data});
-      context.setState({currentRound: res.data[res.data.length - 1].name});
-      context.setState({currentExercise: res.data[res.data.length - 1].exercise});
-      context.setState({currRoundId: res.data[res.data.length - 1]._id});
-      // console.log(context.state);
+    axios.get('/api/exercises').then(function(res) {
+      context.setState({exercises: res.data});
     });
-
-    // Get existing achievements
-    axios.get('/api/achievements').then(function(res) {
-      context.setState({achievements: res.data});
-      // console.log(context.state);
-    });
-
   }
 
 
@@ -66,9 +61,8 @@ export default class Dashboard extends React.Component {
                 <p>Current Exercise: {this.state.currentExercise}</p>
               </div>
               <div>
-                <NewRound updateData={this.props.updateData} />
-                <AddUser />
-                <AddExercise />
+                <NewRound updateData={this.props.updateData} exercises={this.state.exercises} />
+                
               </div>
             </div>
           </div>
@@ -78,6 +72,7 @@ export default class Dashboard extends React.Component {
 }
 
 
-
+//<AddUser />
+//<AddExercise />
 
         

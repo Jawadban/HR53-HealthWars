@@ -52,18 +52,6 @@ export default class LoggingExercise extends React.Component {
 
   componentDidMount() {
     if (this.props.currentUser !== null) {
-      // var currEx = this.props.rounds[this.props.rounds.length - 1].exercise;
-      // var currRoundId = this.props.rounds[this.props.rounds.length - 1]._id;
-      // this.setState({currentRound: this.props.rounds[this.props.rounds.length - 1].name,
-      //                currentExercise: currEx, currRoundId: currRoundId});
-
-      // // Get the unit measure for the current exercise
-      // for (var i = 0; i < this.props.exercise.length; i++) {
-      //   if (this.props.exercise[i].name === currEx) {
-      //     this.setState({currentExUnit: this.props.exercise[i].unit});
-      //     return;
-      //   }
-      // }
       var current = this.props.rounds[this.props.rounds.length - 1];
       this.setState({
         currentRound: current.name,
