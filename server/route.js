@@ -66,6 +66,7 @@ app.post('/api/users/newround', userController.addRound);
 
 // Add a new star (see schema for fields)
 //app.post('/api/stars', starController.newStar);
+app.post('/api/stars2', starControllerSQL.newStar);
 
 // Get all stars
 //app.get('/api/stars', starController.getStars);

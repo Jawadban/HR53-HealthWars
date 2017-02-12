@@ -14,6 +14,7 @@ export default class LoggingExercise extends React.Component {
       currentRound: null,
       currentExercise: null,
       currRoundId: null,
+      currentExUnit: null,
       value: 'Red'
     }
     this.unitChange = this.unitChange.bind(this);
@@ -26,36 +27,50 @@ export default class LoggingExercise extends React.Component {
     if (nextProps.currentUser !== null) {
 
       // Variables to represent the current round & exercise via received props
-      var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
-      var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
-      var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
+      // var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
+      // var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
+      // var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
 
-      this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
+      // this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
 
-      // Get the unit measure for the current exercise
-      for (var i = 0; i < nextProps.exercise.length; i++) {
-        if (nextProps.exercise[i].name === currEx) {
-          this.setState({currentExUnit: nextProps.exercise[i].unit});
-          return;
-        }
-      }
+      // // Get the unit measure for the current exercise
+      // for (var i = 0; i < nextProps.exercise.length; i++) {
+      //   if (nextProps.exercise[i].name === currEx) {
+      //     this.setState({currentExUnit: nextProps.exercise[i].unit});
+      //     return;
+      //   }
+      // }
+      var current = this.props.rounds[this.props.rounds.length - 1];
+      this.setState({
+        currentRound: current.name,
+        currentExercise: current.exercise_name, 
+        currRoundId: current.id,
+        currentExUnit: current.unit
+      });
     }
   }
 
   componentDidMount() {
     if (this.props.currentUser !== null) {
-      var currEx = this.props.rounds[this.props.rounds.length - 1].exercise;
-      var currRoundId = this.props.rounds[this.props.rounds.length - 1]._id;
-      this.setState({currentRound: this.props.rounds[this.props.rounds.length - 1].name,
-                     currentExercise: currEx, currRoundId: currRoundId});
+      // var currEx = this.props.rounds[this.props.rounds.length - 1].exercise;
+      // var currRoundId = this.props.rounds[this.props.rounds.length - 1]._id;
+      // this.setState({currentRound: this.props.rounds[this.props.rounds.length - 1].name,
+      //                currentExercise: currEx, currRoundId: currRoundId});
 
-      // Get the unit measure for the current exercise
-      for (var i = 0; i < this.props.exercise.length; i++) {
-        if (this.props.exercise[i].name === currEx) {
-          this.setState({currentExUnit: this.props.exercise[i].unit});
-          return;
-        }
-      }
+      // // Get the unit measure for the current exercise
+      // for (var i = 0; i < this.props.exercise.length; i++) {
+      //   if (this.props.exercise[i].name === currEx) {
+      //     this.setState({currentExUnit: this.props.exercise[i].unit});
+      //     return;
+      //   }
+      // }
+      var current = this.props.rounds[this.props.rounds.length - 1];
+      this.setState({
+        currentRound: current.name,
+        currentExercise: current.exercise_name, 
+        currRoundId: current.id,
+        currentExUnit: current.unit
+      });
     
     }
   }
@@ -91,12 +106,15 @@ export default class LoggingExercise extends React.Component {
     console.log('SUBMIT STAR!');
     var context = this;
     for (var i = 0; i < this.state.units; i++){
-      axios.post('/api/stars/', {'color': context.state.value, '_userId': context.props.currentUser._id, '_roundId': this.state.currRoundId}).then(function(res) {
+      axios.post('/api/stars2/', {
+        'color': context.state.value, 
+        'id_users': context.props.currentUser.id, 
+        'id_competition': context.state.currRoundId
+      }).then(function(res) {
       console.log('STAR SUBMITTED!');
-        axios.get('/api/stars/').then(function(res){
-          console.log('RES', res.data[res.data.length-1]._userId.name);
-          console.log('STAR ADDED', res.data[res.data.length-1].color);
-        });
+        // axios.get('/api/stars2/user/' + context.props.currentUser.id).then(function(res){
+        //   console.log('STAR ADDED', res.data[res.data.length-1].color);
+        // });
       });
     }
     this.setState({units: 0});

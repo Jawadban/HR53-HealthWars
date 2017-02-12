@@ -23,7 +23,7 @@ module.exports = {
     }).then(function(conn){
         connection = conn;
   
-        return connection.query('select c.id, c.name as name, e.name as exercises from competition c inner join exercises e on e.id = c. id_exercises');
+        return connection.query('select c.id, c.name as name, e.name as exercise_name, e.unit, e.description  from competition c inner join exercises e on e.id = c. id_exercises');
     }).then(function(rows){
         // Logs out a list of hobbits 
         console.log(rows);
