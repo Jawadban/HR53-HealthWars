@@ -57,8 +57,7 @@ app.get('/facebooklogin', function (req, res){
 
 app.get('/logout', function (req, res) {
   // passport attaches logout method to all requests
-  console.log('THIS IS BEING CALLED');
-
+  console.log('The logout listener is working');
   req.logout();
   res.redirect('/');
 });
@@ -74,6 +73,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) 
         return next();
     // if they aren't redirect them to the home page
-    res.redirect('/');
+    res.send('This user is not logged in');
+    //res.redirect('/');
 }
 
