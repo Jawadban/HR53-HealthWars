@@ -65,7 +65,12 @@ app.get('/logout', function (req, res) {
 
 app.get('/testing', isLoggedIn, function(req, res) {
   res.send('Authenticated');
-})
+});
+
+app.post('/betting', function(req, res) {
+  console.log(req.body);
+  res.send('Posted data!');
+});
 
 //============ route middleware to make sure a user is logged in =============/
 function isLoggedIn(req, res, next) {
