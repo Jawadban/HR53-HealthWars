@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import axios from 'axios';
 
 export default class Betting extends React.Component {
 
@@ -10,16 +11,24 @@ export default class Betting extends React.Component {
       currUser: '',
       username: '',
       description: '',
-      winner: ''
+      winner: '', 
+      users: [], 
+      challenger: '',
+      competitor: '',
+      starsChallenged: 1
     };
-    //console.log(props.currentUser);
-    //console.log("state: " + this.state);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleStarsChange = this.handleStarsChange.bind(this);
     this.handleDescChange = this.handleDescChange.bind(this);
     this.handleWinnerChange = this.handleWinnerChange.bind(this);
     this.handleCurrChange = this.handleCurrChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentWillMount () {
+    var context = this;
+    axios.get('/api/users2').then(function(res) {
+      context.setState({users: res.data});
+    });
   }
 
   handleUsernameChange(event) {
@@ -48,22 +57,12 @@ export default class Betting extends React.Component {
   }
 
   handleSubmit(event) {
-   // var url = "https://hooks.slack.com/services/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";
-    $.ajax({
-      data: JSON.stringify(this.state),
-      processData: false,
-      dataType: "json", 
-      contentType: "application/json",
-      type: 'POST',
-      url: "/betting",
-      // success: function(data) {
-      //   console.log("data: " + data);
-     // }
+    event.preventDefault();
+    axios.post('/betting', JSON.stringify(this.state)).then(function(res) {
+      console.log("data: " + data);
+      alert('success');
     });
-   // console.log(this.state);
-   // console.log('Submitted!');
-    //alert('A name was submitted: ' + this.state.value);
-    //event.preventDefault();
+
   }
 
   render() {
@@ -74,26 +73,30 @@ export default class Betting extends React.Component {
         Enter the information below to place a bet and jump to the top of the leaderboard!
         </p>
         <form onSubmit={this.handleSubmit}>
+        
         <label>
-          Username of Challenger:
-          <input type="text" value={this.state.currUser} onChange={this.handleCurrChange} />
-        </label>
-        <label>
-          Username of Competitor:
-          <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+          Competitor to Challenge:
+
+          <select className="form-control" name="user" ref="competitor" value={this.state.competitor} onChange={this.handleUsernameChange} >
+            { this.state.users.map((user, i) =>
+            <option key={i} value={user.id}>{user.name}</option>
+            ) }
+          </select>
+
         </label>
         <label>
           Number of Stars:
-          <input type="text" value={this.state.numStars} onChange={this.handleStarsChange} />
+
+          <select className="form-control" name="user" ref="competitor" value={this.state.starsChallenged} onChange={this.handleStarsChange} >
+            <option key="1" value="1">1</option>
+            <option key="2" value="2">2</option>
+            <option key="3" value="3">3</option>
+            <option key="4" value="4">4</option>
+            <option key="5" value="5">5</option>
+          </select>
+
         </label>
-        <label>
-          Describe Event Details:
-          <input type="text" maxLength='100' value={this.state.description} onChange={this.handleDescChange} />
-        </label>
-        <label>
-          Winner:
-          <input type="text" value={this.state.winner} onChange={this.handleWinnerChange}/>
-        </label>
+
         <input type="submit" value="Submit" />
         </form>
       </div>
@@ -101,3 +104,5 @@ export default class Betting extends React.Component {
   }
 
 }
+
+
