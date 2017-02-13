@@ -4,12 +4,12 @@ import $ from 'jquery';
 
 export default class Slack extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       message: '',
-      username: 'incoming_webhook',
-      channel: '#random'
+      username: 'mySlackUsername',
+      channel: '#healthwars'
      // users: null, // this is more or less used as a check for new props
     //  data: [] // this is the data to be used to sort the Overview table
     };
@@ -17,6 +17,21 @@ export default class Slack extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleChannelChange = this.handleChannelChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount () {
+    if (this.props.currentUser !== null) {
+      this.setState({
+        username: this.props.currentUser.name
+      });
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentUser !== null) {
+      this.setState({
+        username: this.props.currentUser.name
+      });
+    }
   }
 
   handleMessageChange(event) {
@@ -35,40 +50,73 @@ export default class Slack extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault();
+    var context = this;
     var url = "https://hooks.slack.com/services/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";
     $.ajax({
       data: 'payload=' + JSON.stringify({"username": this.state.username, "text": this.state.message, "channel": this.state.channel}),
       dataType: 'json',
       processData: false,
       type: 'POST',
-      url: url
+      url: url, 
+      success: function(data) {
+        console.log('Submitted!', data);
+        context.setState({
+           message: '',
+        });
+        alert('Posted to Slack!');
+      },
+      error: function(data) {
+         console.log('Submitted', data);
+         context.setState({
+            message: '',
+         });
+         alert('Posted to Slack!');
+      }
     });
-    console.log('Submitted!');
-    //alert('A name was submitted: ' + this.state.value);
-    //event.preventDefault();
+
   }
 
   render() {
     return (
+
       <div>
-      <h1>Slack Messages</h1>
-      <p>Message your friends on Slack to update them on your progress or invite them to challenges!</p>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Message:
-          <input type="text" value={this.state.message} onChange={this.handleMessageChange} />
-        </label>
-        <label>
-          Username:
-          <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-        </label>
-        <label>
-          Channel or @User:
-          <input type="text" value={this.state.channel} onChange={this.handleChannelChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <h2>Post Progress to Slack</h2>
+
+        <hr />
+
+        <div className="row">
+          <div className="col-sm-6 col-sm-offset-3 well text-left">
+            <p>Message your friends on Slack to update them on your progress or invite them to challenges!</p>
+
+            <form onSubmit={this.handleSubmit}>
+
+
+              <div className="form-group">
+                  <label>Slack Username:</label>
+                  <input className="form-control" type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+              </div>
+
+              <div className="form-group">
+                  <label>Channel or @User:</label>
+                  <input className="form-control" type="text" value={this.state.channel} onChange={this.handleChannelChange} />
+              </div>
+              
+              <div className="form-group">
+                  <label>Message:</label>
+                  <textarea className="form-control" value={this.state.message} onChange={this.handleMessageChange} />
+              </div>
+
+              <button className="btn-lg btn-primary" type="submit" value="Add User">Post Message</button>
+              
+            </form>
+          </div>
+        </div>
+
       </div>
+      
+
+  
     );
   }
 }

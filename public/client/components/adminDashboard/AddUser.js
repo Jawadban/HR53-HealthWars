@@ -33,7 +33,7 @@ export default class AddUser extends React.Component {
     return (
         <div className='admin-form'>
           <form className="form" onSubmit={this.handleSubmit}>
-            <h5>New User</h5>
+            <h3>New User</h3>
             <input className="form-control" type="text" name="name" placeholder="Name" ref="name" />
             <input className="form-control" type="text" name="username" placeholder="Username" ref="username" />
             

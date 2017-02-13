@@ -18,8 +18,8 @@ import axios from 'axios';
 render((
   <Router history={hashHistory}>
     <Route component={App}>
-      <Route component={MainLayout} onEnter={authenticate}>
-        <Route path="/" component={Overview} />  
+      <Route path="/" component={MainLayout} onEnter={authenticate}>
+        <IndexRedirect to="/user" /> 
         <Route path="/user" component={UserView} />
         <Route path="/overview" component={Overview}/>
         <Route path="/exercise" component={LoggingExercise}/>

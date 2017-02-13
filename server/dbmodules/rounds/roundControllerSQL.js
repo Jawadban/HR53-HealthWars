@@ -11,12 +11,12 @@ module.exports = {
         database: 'healthwars'
     }).then(function(conn){
         connection = conn;
-        console.log('BODY', req.body);
+
         var sql = `insert into competition values (null, '${req.body.name}', ${req.body.id_exercises}, null, null)`;
-        console.log('insert competition sql: ', sql);
+
         return connection.query(sql);
     }).then(function(rows){
-        console.log(rows);
+  
         res.json(rows);
         
     });
@@ -34,7 +34,7 @@ module.exports = {
         return connection.query('select c.id, c.name as name, e.name as exercise_name, e.unit, e.description  from competition c inner join exercises e on e.id = c. id_exercises');
     }).then(function(rows){
         // Logs out a list of hobbits 
-        console.log(rows);
+
         res.json(rows);
         
     });
