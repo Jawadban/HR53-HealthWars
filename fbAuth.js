@@ -70,7 +70,7 @@ module.exports = function(passport) {
           if (rows[0]) {
             return done(null, rows[0].id);
           } else {
-            var sql2 = `insert into users values (null, '${profile.displayName}', 'username', 3, '${profile.id}', '${token}')`;
+            var sql2 = `insert into users values (null, '${profile.displayName}', 'username', 2, '${profile.id}', '${token}')`;
 
             mysql.createConnection({
                 host: 'localhost',
