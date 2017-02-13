@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var request = require('request');
 var User = require('./dbmodules/users/userModel.js');
+var usrSql = require('./dbmodules/users/userControllerSQL.js');
+var mysql = require('mysql');
 
 var port = process.env.PORT || 3000;
 
@@ -11,6 +13,15 @@ app.listen(port, function() {
 });
 
 mongoose.connect('mongodb://localhost/healthwars');
+
+var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+});
+
+connection.connect();
 
 // parse requests
 app.use(bodyParser.json());
@@ -65,7 +76,24 @@ app.get('/logout', function (req, res) {
 
 app.get('/testing', isLoggedIn, function(req, res) {
   res.send('Authenticated');
-})
+});
+
+app.post('/betting', function(req, res) {
+  //console.log("curr: " + req.body.currUser);
+  var challenger = req.body.currUser;
+  var competitor = req.body.username;
+  var winner = req.body.username;
+  var loser;
+  if(winner === challenger) loser = competitor;
+  else loser = challenger;
+  connection.query('SELECT stars.id FROM `stars` INNER JOIN `users` ON users.id = stars.id_users WHERE users.username = ?', [loser], function (error, results){
+    console.log("challenger:"+  results);
+    connection.query('SELECT * FROM `stars` INNER JOIN `users` ON users.id = stars.id_users WHERE users.username = ?', [competitor], function (error, res2){
+      console.log("competitor: " + res2);
+      res.send('Posted data!');
+    });
+  });
+});
 
 //============ route middleware to make sure a user is logged in =============/
 function isLoggedIn(req, res, next) {

@@ -12,6 +12,7 @@ import MainLayout from './components/MainLayout';
 import AuthLayout from './components/AuthLayout';
 import Login from './components/auth/Login';
 import Calendar from './components/calendar/Calendar';
+import Betting from './components/betting/Betting';
 import axios from 'axios';
   
 render((
@@ -25,6 +26,7 @@ render((
         <Route path="/admin" component={Dashboard} />
         <Route path="/slack" component={Slack} />
         <Route path="/calendar" component={Calendar} />
+        <Route path="/betting" component={Betting} />
       </Route>
       <Route path="auth" component={AuthLayout}>
         <IndexRedirect to="login" />
