@@ -46,12 +46,78 @@ var sql = [
     "ALTER TABLE `users_achievements` ADD FOREIGN KEY (id_achievements) REFERENCES `achievements` (`id`);",
 
     // add data - users
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (2,'Bill Lea','billylea',2);",
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (3,'Max Quinn','maxquinn',2);",
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (4,'Abiy Melaku','abiymelaku',2);",
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (5,'John Smith','jsmith',1);",
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (6,'Sally Beck','sbeck',3);",
-    // "INSERT INTO `users` (`id`,`name`,`username`,`id_teams`) VALUES (7,'Jane Johnson','jjohnson',4);",
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Aaron', 'Aaron', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Ahmed', 'Ahmed', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Ai', 'Ai', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Albert', 'Albert', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Alison', 'Alison', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Andi', 'Andi', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Anukul', 'Anukul', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Brenner', 'Brenner', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Brian', 'Brian', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Cy', 'Cy', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Daniel', 'Daniel', 3, null, null);",
+
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Dan', 'Dan', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Dave', 'Dave', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Derek', 'Derek', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'DJ', 'DJ', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Franklin', 'Franklin', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Greg', 'Greg', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Hanyen', 'Hanyen', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Jackie', 'Jackie', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'James', 'James', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Jared', 'Jared', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'John', 'John', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Jon', 'Jon', 3, null, null);",
+
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Justin', 'Justin', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Kay', 'Kay', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Marcus', 'Marcus', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Pat', 'Pat', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Peter', 'Peter', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Savy', 'Savy', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Simon', 'Simon', 2, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Smriti', 'Smriti', 3, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Mark', 'Mark', 4, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Tenzin', 'Tenzin', 1, null, null);",
+
+    "INSERT INTO `users` (`id`, `name`, `username`, `id_teams`, `facebook_id`, `facebook_token`) VALUES (null, 'Will', 'Will', 2, null, null);",
+
+
+
 
     // add data - teams
     "INSERT INTO `teams` (`name`) VALUES ('HR-52');",
@@ -67,17 +133,41 @@ var sql = [
     "INSERT INTO `exercises` (`name`, `unit`, `description`) VALUES ('Jumping Jacks', '20', 'Arms to at least 45 degrees upwards');",
 
     //add data - competition
-    "INSERT INTO `competition` (`name`, `id_exercises`, `start`, `end`) VALUES ('Week 1', '1', '2017-02-14', '2017-02-21');",
+    "INSERT INTO `competition` (`name`, `id_exercises`, `start`, `end`) VALUES ('Week 1', '1', '2017-02-06', '2017-02-11');",
 
-
+    "INSERT INTO `competition` (`name`, `id_exercises`, `start`, `end`) VALUES ('Week 2', '2', '2017-02-13', '2017-02-18');",
 
 ];
+
+var colors = [
+    'red', 'blue', 'green', 'orange', 'bronze', 'purple', 'pink', 'silver', 'gold'
+];
+
+var starsSQL = '';
+// generate stars
+for (var i = 1; i < 35; i++) {
+    var random = Math.floor((Math.random() * 10) + 1);
+        var randomColor = Math.floor((Math.random() * colors.length));
+    for (var j = 0; j < random; j++) {
+        starsSQL += "INSERT INTO `stars` (`id`, `color`, `id_users`, `id_competition`) VALUES (null, '" + colors[randomColor] + "', " + i + ", 1);";
+
+    }
+
+    var random2 = Math.floor((Math.random() * 10) + 1);
+        var randomColor = Math.floor((Math.random() * colors.length));
+    for (var j = 0; j < random2; j++) {
+        starsSQL += "INSERT INTO `stars` (`id`, `color`, `id_users`, `id_competition`) VALUES (null, '" + colors[randomColor] + "', " + i + ", 2);";
+
+    }
+}
+
 
 var insert = '';
 for (var i = 0; i < sql.length; i++) {
     insert += sql[i];
 }
 
+insert += starsSQL;
 
 connection.query(insert, function (error, results, fields) {
   if (error) throw error;

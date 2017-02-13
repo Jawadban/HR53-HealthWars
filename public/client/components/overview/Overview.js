@@ -74,9 +74,13 @@ export default class Overview extends React.Component {
 
 
   render() {
-
+    var context = this;
     var round = this.state.roundValue;
-    const listItems = Object.keys(this.state.stars).map((user, i) =>
+    const listItems = Object.keys(this.state.stars)
+    .sort(function(a, b) {
+        return context.state.stars[b].stars.length - context.state.stars[a].stars.length
+    })
+    .map((user, i) =>
       <UserTotal key={i} user={this.state.stars[user]} round={round} />
     );
 
