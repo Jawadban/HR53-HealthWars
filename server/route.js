@@ -74,7 +74,7 @@ app.get('/api/teams', userControllerSQL.getTeams);
 app.post('/api/stars2', starControllerSQL.newStar);
 
 // Get all stars
-//app.get('/api/stars', starController.getStars);
+app.get('/api/stars2', starControllerSQL.getStars);
 
 // Get all stars
 //app.get('/api/stars/count', starController.getStarsCount);

@@ -8,82 +8,90 @@ export default class Overview extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: null, // this is more or less used as a check for new props
-      data: [] // this is the data to be used to sort the Overview table
+      stars: [],
     };
   }
 
   // scans for change in props for use on the page
   componentWillReceiveProps(nextProps) {
-    var context = this;
-      if (nextProps.users !== this.state.users) {
-        this.setState({users: nextProps.users});
-        nextProps.users.forEach(function(person) {
-          var total = person.scores.reduce((pv, cv) => pv+cv, 0);
-          person.total = total;
-          context.addData(person);
-        });
-        context.sortByTotal();
-      }
+     
   }
 
   componentDidMount () {
     var context = this;
-    this.setState({users: this.props.users});
-    if (this.props.users !== null) {
-      this.props.users.forEach(function(person) {
-        var total = person.scores.reduce((pv, cv) => pv+cv, 0);
-        person.total = total;
-        context.addData(person);
-      });
-      context.sortByTotal();
-    }
-  }
+    axios.get('/api/stars2/').then(function(res) {
 
-  // pushes all values into the data state for use in the table
-  addData(item) {
-    var currentData = this.state.data;
-    currentData.push(item);
-    this.setState({
-      data: currentData
+      var storage = {};
+      var allData = [];
+
+      for (var i = 0; i < res.data.length; i++) {
+
+        if (storage[res.data[i].id] === undefined) {
+          storage[res.data[i].id] = {
+            name: res.data[i].name,
+            team: res.data[i].team,
+            stars: []
+          };
+        }
+        if (res.data[i].star_id !== null) {
+          storage[res.data[i].id].stars.push(res.data[i]);
+        }
+      }
+
+      // for (var user in storage) {
+      //   allData.push(user);
+      // }
+
+      console.log('Storage', storage);
+      context.setState({stars: storage});
     });
+    
   }
-
-  // sorts the table based on the values found and sets the next state
-  sortByTotal() {
-    var currentData = this.state.data;
-
-    currentData.sort(function(a, b) {
-      return b.total - a.total;
-    });
-
-    this.setState({
-      data: currentData
-    });
-  }
-
 
   render() {
+
+    // var starsAll = this.state.stars;
+
+    // for (var user in starsAll) {
+    //   console.log('USER', starsAll[user]);
+
+
+    // }
+
+    const listItems = Object.keys(this.state.stars).map((user, i) =>
+      <UserTotal key={i} user={this.state.stars[user]} />
+    );
+
     return (
+
+
+      
+
       <div id='overview' className='text-center'>
         <div className='overview-header'>
-          <h2>Organization Totals</h2>
+          <h2>Overall Leaderboard</h2>
         </div>
         <table className='table'>
           <thead>
             <tr>
               <th>Name</th>
               <th>Team</th>
-              <th>Total Stars</th>
+              <th>Count</th>
+              <th>Stars</th>
             </tr>
           </thead>
-          <tbody>
-            { this.state.data.map((person, i) =>
-            <UserTotal key={i} className='texttd' name={person.name} team={person.team} total={person.total} />
-            ) }
+          <tbody> 
+
+            {listItems}
+         
           </tbody>
         </table>
       </div>
     )
+
+
   }
 }
+
+//<UserTotal key={i} className='texttd' name={person.name} team={person.team} total={person.total} />
+
