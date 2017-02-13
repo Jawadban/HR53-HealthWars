@@ -10,6 +10,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       rounds: [],
+      teams: [],
       users: null,
       exercise: null,
       currentUser: null,
@@ -62,6 +63,12 @@ export default class App extends React.Component {
         context.setState({userStars: res.data});
       });
     });
+
+    // Set Teams
+    axios.get('/api/teams').then(function(res) {
+      context.setState({teams: res.data});
+    });
+  
 
 
   }

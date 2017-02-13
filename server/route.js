@@ -76,6 +76,9 @@ app.post('/api/stars2', starControllerSQL.newStar);
 // Get all stars
 app.get('/api/stars2', starControllerSQL.getStars);
 
+// Filtered Stars
+app.get('/api/stars2/team/:team_id/round/:round_id', starControllerSQL.getStarsFiltered);
+
 // Get all stars
 //app.get('/api/stars/count', starController.getStarsCount);
 
