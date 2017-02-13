@@ -29,7 +29,7 @@ export default class AddExercise extends React.Component {
   render() {
     return (
         <div className='admin-form'>
-          <h5>New Exercise</h5>
+          <h3>New Exercise</h3>
           <form className="form" onSubmit={this.handleSubmit}>
             <input className="form-control" type="text" name="name" placeholder="Name" ref="name" />
             <input className="form-control" type="text" name="unit" placeholder="Unit Measure" ref="unit" />

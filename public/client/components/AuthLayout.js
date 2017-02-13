@@ -9,9 +9,15 @@ export default class AuthLayout extends React.Component {
     }.bind(this))
 
     return (
-      <div>
-        {children}
+
+      <div className="container-fluid auth">
+        <div className="row text-center">
+          <div className="col-md-4 col-md-offset-4">
+            {children}
+          </div>
+        </div>
       </div>
+
     )
 
   }

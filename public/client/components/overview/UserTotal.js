@@ -48,9 +48,9 @@ export default class UserTotal extends React.Component {
   render() {
     return (
       <tr>
-        <td className='texttd'>{this.state.user.name}</td>
-        <td className='texttd'>{this.state.user.team}</td>
-        <td className='texttd'>{this.renderStars(2)}</td>
+        <td className='texttd user'>{this.state.user.name}</td>
+        <td className='texttd text-center'>{this.state.user.team}</td>
+        <td className='texttd text-center'>{this.renderStars(2)}</td>
         <td className='texttd'>
         {this.renderStars(1)}
         </td>

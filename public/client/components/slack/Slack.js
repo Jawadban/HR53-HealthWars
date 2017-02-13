@@ -79,25 +79,44 @@ export default class Slack extends React.Component {
 
   render() {
     return (
+
       <div>
-      <h1>Slack Messages</h1>
-      <p>Message your friends on Slack to update them on your progress or invite them to challenges!</p>
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Message:
-          <input type="text" value={this.state.message} onChange={this.handleMessageChange} />
-        </label>
-        <label>
-          Username:
-          <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-        </label>
-        <label>
-          Channel or @User:
-          <input type="text" value={this.state.channel} onChange={this.handleChannelChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <h2>Post Progress to Slack</h2>
+
+        <hr />
+
+        <div className="row">
+          <div className="col-sm-6 col-sm-offset-3 well text-left">
+            <p>Message your friends on Slack to update them on your progress or invite them to challenges!</p>
+
+            <form onSubmit={this.handleSubmit}>
+
+
+              <div className="form-group">
+                  <label>Slack Username:</label>
+                  <input className="form-control" type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+              </div>
+
+              <div className="form-group">
+                  <label>Channel or @User:</label>
+                  <input className="form-control" type="text" value={this.state.channel} onChange={this.handleChannelChange} />
+              </div>
+              
+              <div className="form-group">
+                  <label>Message:</label>
+                  <textarea className="form-control" value={this.state.message} onChange={this.handleMessageChange} />
+              </div>
+
+              <button className="btn-lg btn-primary" type="submit" value="Add User">Post Message</button>
+              
+            </form>
+          </div>
+        </div>
+
       </div>
+      
+
+  
     );
   }
 }

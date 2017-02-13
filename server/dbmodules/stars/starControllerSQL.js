@@ -17,10 +17,10 @@ module.exports = {
                       from users u
                       left join stars s on u.id = s.id_users
                       left join teams t on t.id = u.id_teams`;
-          //console.log('stars sql: ', sql);
+          
           return connection.query(sql);
       }).then(function(rows){
-          //console.log(rows);
+          
           res.json(rows);
           
       });
@@ -35,10 +35,10 @@ module.exports = {
       }).then(function(conn){
           connection = conn;
           var sql = `select * from stars where id_users = ${req.params.id}`;
-          //console.log('stars sql: ', sql);
+          
           return connection.query(sql);
       }).then(function(rows){
-          //console.log(rows);
+         
           res.json(rows);
           
       });
@@ -72,10 +72,10 @@ module.exports = {
                       left join teams t on t.id = u.id_teams
                       ${teamSQL}
                       ${roundSQL}`;
-          console.log('stars filtered sql: ', sql);
+          
           return connection.query(sql);
       }).then(function(rows){
-          //console.log(rows);
+          
           res.json(rows);
           
       });
@@ -89,13 +89,12 @@ module.exports = {
           database: 'healthwars'
       }).then(function(conn){
           connection = conn;
-          //console.log('BODY', req.body);
-          //console.log('QUERY', req.params);
+          
           var sql = `insert into stars values (null, '${req.body.color}', ${req.body.id_users}, ${req.body.id_competition})`;
-          console.log('insert stars sql: ', sql);
+          
           return connection.query(sql);
       }).then(function(rows){
-          //console.log(rows);
+      
           res.json(rows);
           
       });

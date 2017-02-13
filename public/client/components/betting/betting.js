@@ -58,48 +58,64 @@ export default class Betting extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.post('/betting', JSON.stringify(this.state)).then(function(res) {
-      console.log("data: " + data);
-      alert('success');
-    });
+    // axios.post('/betting', JSON.stringify(this.state)).then(function(res) {
+    //   console.log("data: " + data);
+    //   alert('success');
+    // });
+    alert('Bet Placed. Good luck!');
 
   }
 
   render() {
     return (
+
       <div>
-        <h1>Bets</h1>
-        <p>Want to challenge your friends in competitive challenges? 
-        Enter the information below to place a bet and jump to the top of the leaderboard!
-        </p>
-        <form onSubmit={this.handleSubmit}>
-        
-        <label>
-          Competitor to Challenge:
+        <h2>Place a Bet</h2>
 
-          <select className="form-control" name="user" ref="competitor" value={this.state.competitor} onChange={this.handleUsernameChange} >
-            { this.state.users.map((user, i) =>
-            <option key={i} value={user.id}>{user.name}</option>
-            ) }
-          </select>
+        <hr />
 
-        </label>
-        <label>
-          Number of Stars:
+        <div className="row">
+          <div className="col-sm-6 col-sm-offset-3 well text-left">
+            <p>Want to challenge your friends in competitive challenges? 
+            Enter the information below to place a bet and jump to the top of the leaderboard!
+            </p>
+            <form onSubmit={this.handleSubmit}>
 
-          <select className="form-control" name="user" ref="competitor" value={this.state.starsChallenged} onChange={this.handleStarsChange} >
-            <option key="1" value="1">1</option>
-            <option key="2" value="2">2</option>
-            <option key="3" value="3">3</option>
-            <option key="4" value="4">4</option>
-            <option key="5" value="5">5</option>
-          </select>
 
-        </label>
+              <div className="form-group">
+                  <label>Competitor to Challenge:</label>
+                  <select className="form-control" name="user" ref="competitor" onChange={this.handleUsernameChange} >
+                    { this.state.users.map((user, i) =>
+                    <option key={i} value={user.id}>{user.name}</option>
+                    ) }
+                  </select>
+               </div>
 
-        <input type="submit" value="Submit" />
-        </form>
+              <div className="form-group">
+                  <label>Number of Stars to Bet:</label>
+                  <select className="form-control" name="user" ref="competitor" onChange={this.handleStarsChange} >
+                    <option key="1" value="1">1</option>
+                    <option key="2" value="2">2</option>
+                    <option key="3" value="3">3</option>
+                    <option key="4" value="4">4</option>
+                    <option key="5" value="5">5</option>
+                  </select>
+              </div>
+              
+              <div className="form-group">
+                  <label>Message:</label>
+                  <textarea className="form-control" value={this.state.description} onChange={this.handleDescChange} />
+              </div>
+
+              <button className="btn-lg btn-primary" type="submit" value="Add User">Place Bet</button>
+              
+            </form>
+          </div>
+        </div>
+
       </div>
+
+
     );
   }
 

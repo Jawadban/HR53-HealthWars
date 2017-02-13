@@ -54,10 +54,10 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
   if (!req.user.goal) {
     // if user has no goal, allow them to create one
-    res.redirect('/#/overview');
+    res.redirect('/#/');
   } else {
     // else log user in and redirect to goal status page
-    res.redirect('/#/overview');
+    res.redirect('/#/');
   }
 });
 

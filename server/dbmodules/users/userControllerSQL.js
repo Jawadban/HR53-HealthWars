@@ -14,7 +14,7 @@ module.exports = {
         connection = conn;
         return connection.query(sql);
     }).then(function(rows){
-        console.log(rows);
+        //asdf
         res.json(rows);
         
     });
@@ -23,7 +23,7 @@ module.exports = {
   // Create new user from admin form
   newUserAdmin : function(req, res, next) {
     var sql = `insert into users values (null, '${req.body.name}', '${req.body.username}', '${req.body.id_teams}', null, null)`;
-    console.log(sql);
+    
     return mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -33,7 +33,7 @@ module.exports = {
         connection = conn;
         return connection.query(sql);
     }).then(function(rows){
-        console.log(rows);
+        
         res.json(rows);
         
     });
@@ -56,7 +56,7 @@ module.exports = {
   
   getUser : function(req, res, next) {
     var sql = `select u.id, u.name, u.username, t.name as team from users u inner join teams t on t.id = u.id_teams where u.id = '${req.params.id}'`;
-    console.log('sql', sql);
+    
     return mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -66,7 +66,7 @@ module.exports = {
         connection = conn;
         return connection.query(sql);
     }).then(function(rows){
-        console.log(rows);
+        
         res.json(rows[0]);
         
     });

@@ -26,35 +26,7 @@ export default class Overview extends React.Component {
   componentDidMount () {
 
     var context = this;
-
     this.getFiltered(999, 999);
-
-    // axios.get('/api/stars2/').then(function(res) {
-
-    //   var storage = {};
-    //   var allData = [];
-
-    //   for (var i = 0; i < res.data.length; i++) {
-
-    //     if (storage[res.data[i].id] === undefined) {
-    //       storage[res.data[i].id] = {
-    //         name: res.data[i].name,
-    //         team: res.data[i].team,
-    //         stars: []
-    //       };
-    //     }
-    //     if (res.data[i].star_id !== null) {
-    //       storage[res.data[i].id].stars.push(res.data[i]);
-    //     }
-    //   }
-
-    //   // for (var user in storage) {
-    //   //   allData.push(user);
-    //   // }
-
-    //   console.log('Storage', storage);
-    //   context.setState({stars: storage});
-    // });
     
   }
 
@@ -63,7 +35,6 @@ export default class Overview extends React.Component {
     this.setState({
       roundValue: event.target.value
     });
-    console.log('NEW VALUE', this.state.roundValue);
     this.getFiltered(this.state.teamValue, event.target.value);
   
   }
@@ -73,7 +44,6 @@ export default class Overview extends React.Component {
     this.setState({
       teamValue: event.target.value
     });
-    console.log('NEW TEAM VALUE', event.target.value);
     this.getFiltered(event.target.value, this.state.roundValue);
   
   }
@@ -82,7 +52,6 @@ export default class Overview extends React.Component {
     var context = this;
     var route = `/api/stars2/team/${team}/round/${round}`;
     axios.get(route).then(function(res) {
-      console.log('UPDATING FILTER STARS', route);
       var storage = {};
       var allData = [];
 
@@ -106,13 +75,6 @@ export default class Overview extends React.Component {
 
   render() {
 
-    // var starsAll = this.state.stars;
-
-    // for (var user in starsAll) {
-    //   console.log('USER', starsAll[user]);
-
-
-    // }
     var round = this.state.roundValue;
     const listItems = Object.keys(this.state.stars).map((user, i) =>
       <UserTotal key={i} user={this.state.stars[user]} round={round} />
@@ -120,29 +82,40 @@ export default class Overview extends React.Component {
 
     return (
 
-
-      
-
       <div id='overview' className='text-center'>
         <div className='overview-header'>
-          <h2>Overall Leaderboard</h2>
+          <h2>Leaderboard</h2>
 
-          <select className="form-control" name="team" ref="team_id" value={this.state.teamValue} onChange={this.handleChangeTeam} >
-            <option key='999' value='999'>All Teams</option>
-            { this.props.teams.map((team, i) =>
-            <option key={i} value={team.id}>{team.name}</option>
-            ) }
-          </select>
+          <hr />
 
-          <select className="form-control" name="round" ref="round_id" value={this.state.roundValue} onChange={this.handleChange} >
-            <option key='999' value='999'>All Rounds</option>
-            { this.props.rounds.map((round, i) =>
-            <option key={i} value={round.id}>{round.name}</option>
-            ) }
-          </select>
+          <div className="row well well-lg">
+            <div className="col-sm-6">
+
+              <select className="form-control" name="team" ref="team_id" value={this.state.teamValue} onChange={this.handleChangeTeam} >
+                <option key='999' value='999'>All Teams</option>
+                { this.props.teams.map((team, i) =>
+                <option key={i} value={team.id}>{team.name}</option>
+                ) }
+              </select>
+
+            </div>
+            <div className="col-sm-6">
+
+              <select className="form-control" name="round" ref="round_id" value={this.state.roundValue} onChange={this.handleChange} >
+                <option key='999' value='999'>All Rounds</option>
+                { this.props.rounds.map((round, i) =>
+                <option key={i} value={round.id}>{round.name}</option>
+                ) }
+              </select>
+
+            </div>
+          </div>
 
         </div>
-        <table className='table'>
+
+        <hr />
+        
+        <table className='table table-bordered table-hover'>
           <thead>
             <tr>
               <th>Name</th>
@@ -163,6 +136,3 @@ export default class Overview extends React.Component {
 
   }
 }
-
-//<UserTotal key={i} className='texttd' name={person.name} team={person.team} total={person.total} />
-

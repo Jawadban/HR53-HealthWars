@@ -25,21 +25,6 @@ export default class LoggingExercise extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser !== null) {
-
-      // Variables to represent the current round & exercise via received props
-      // var currEx = nextProps.rounds[nextProps.rounds.length - 1].exercise;
-      // var currRound = nextProps.rounds[nextProps.rounds.length - 1].name;
-      // var currRoundId = nextProps.rounds[nextProps.rounds.length - 1]._id;
-
-      // this.setState({currentRound: currRound, currentExercise: currEx, currRoundId: currRoundId});
-
-      // // Get the unit measure for the current exercise
-      // for (var i = 0; i < nextProps.exercise.length; i++) {
-      //   if (nextProps.exercise[i].name === currEx) {
-      //     this.setState({currentExUnit: nextProps.exercise[i].unit});
-      //     return;
-      //   }
-      // }
       var current = this.props.rounds[this.props.rounds.length - 1];
       this.setState({
         currentRound: current.name,
@@ -115,50 +100,55 @@ export default class LoggingExercise extends React.Component {
 
   render() {
     return (
-      <div className="text-center">
-        <table className="exercise-info col-xs-offset-4 col-xs-6 text-left">
-          <tbody>
-            <tr>
-              <td onClick={this.submitStar}>Current Round:</td>
-              <td>{this.state.currentRound}</td>
-            </tr>
-            <tr>
-              <td>Current Exercise:</td>
-              <td>{this.state.currentExercise}</td>
-            </tr>
-            <tr>
-              <td>Exercise Unit:</td>
-              <td>{this.state.currentExUnit}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td><ChangeUnits onClick={this.unitChange} type={'-'} /></td>
-              <td><div className="unit-display">{ this.state.units }</div> </td>
-              <td><ChangeUnits onClick={this.unitChange} type={'+'} /></td>
-            </tr>
-            <tr>
-              <td colSpan="3">
-                <select className="form-control" onChange={this.change} value={this.state.value}>
+      <div>
+        <h2>Record Completed Exercise</h2>
+
+        <hr />
+
+        <div className="row well well-lg">
+          <div className="col-sm-6">
+
+            <h3>Current Round:</h3>
+            <h4>{this.state.currentRound}</h4>
+            <hr />
+
+            <h3>Current Exercise:</h3>
+            <h4>{this.state.currentExercise}</h4>
+            <hr />
+
+            <h3>Exercise Unit:</h3>
+            <h4>{this.state.currentExUnit}</h4>
+
+          </div>
+          <div className="col-sm-6">
+
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td><ChangeUnits onClick={this.unitChange} type={'-'} /></td>
+                  <td><div className="unit-display">{ this.state.units }</div> </td>
+                  <td><ChangeUnits onClick={this.unitChange} type={'+'} /></td>
+                </tr>
+                <tr>
+                  <td colSpan="3">
+                  <select className="form-control" onChange={this.change} value={this.state.value}>
                   <option>Red</option>
                   <option>Blue</option>
                   <option>Green</option>
                   <option>Yellow</option>
                   <option>Gold</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <div>
-    
-          <Link to={`/user`}><SubmitUnits onClick={this.submitStar} data={this.state.units} href="#/user" /></Link>
-    
+                  </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <Link to={`/user`}><SubmitUnits onClick={this.submitStar} data={this.state.units} href="#/user" /></Link>
+
+          </div>
+
         </div>
       </div>
+     
     )
   }
 }

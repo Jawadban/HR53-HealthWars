@@ -31,7 +31,15 @@ export default class MainLayout extends React.Component {
     return (
       <div>
         <NavigationBar authLogout={this.props.authLogout} />
-        {children}
+
+        <div className="container-fluid main">
+          <div className="row text-center">
+            <div className="col-md-10 col-md-offset-1">
+              {children}
+            </div>
+          </div>
+          <hr />
+        </div>
       </div>
     )
 

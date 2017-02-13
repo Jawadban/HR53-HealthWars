@@ -31,21 +31,20 @@ export default class NewRound extends React.Component {
 
     return (
         <div className='admin-form' id='newround' onSubmit={this.handleSubmit}>
-          <p>Initiate Next Round</p>
+          
           <form className="form" >
-            <h5>Round Name:</h5>
-            <input type="text" className="form-control" name="name" placeholder="Round Name" ref="name" /><br />
-            
-            <h5>Exercise:</h5>
+        
+            <input type="text" className="form-control" name="name" placeholder="Round Name" ref="name" />
+          
 
-            <select className="exercise-dropdown" name="exercise" form='newround' ref="exercise_id" >
+            <select className="exercise-dropdown form-control" name="exercise" form='newround' ref="exercise_id" >
               { this.props.exercises.map((exercise, i) =>
               <option key={i} value={exercise.id}>{exercise.name}</option>
               ) }
-            </select><br /><br />
+            </select>
 
             <button className="btn btn-primary admin-button" type="submit" value="Add User">Start Next Round</button>
-          </form><br />
+          </form>
         </div>
     )
  
