@@ -5,7 +5,6 @@ export default class Betting extends React.Component {
 
   constructor(props) {
     super();
-    console.log(props);
     this.state = {
       numStars: 0,
       username: '',
@@ -13,6 +12,7 @@ export default class Betting extends React.Component {
       winner: '',
       currUser: props.currentUser.username
     };
+    console.log("state: " + this.state);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleStarsChange = this.handleStarsChange.bind(this);
     this.handleDescChange = this.handleDescChange.bind(this);
@@ -50,10 +50,11 @@ export default class Betting extends React.Component {
       type: 'POST',
       url: "/betting",
       success: function(data) {
-        console.log(data);
+        console.log("data: " + data);
       }
     });
-    console.log('Submitted!');
+   // console.log(this.state);
+   // console.log('Submitted!');
     //alert('A name was submitted: ' + this.state.value);
     //event.preventDefault();
   }

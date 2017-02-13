@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var User = require('./dbmodules/users/userModel.js');
 var usrSql = require('./dbmodules/users/userControllerSQL.js');
+var mysql = require('mysql');
 
 var port = process.env.PORT || 3000;
 
@@ -12,6 +13,15 @@ app.listen(port, function() {
 });
 
 mongoose.connect('mongodb://localhost/healthwars');
+
+var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'healthwars'
+});
+
+connection.connect();
 
 // parse requests
 app.use(bodyParser.json());
@@ -71,8 +81,10 @@ app.get('/testing', isLoggedIn, function(req, res) {
 app.post('/betting', function(req, res) {
   console.log(req.body);
   var winner = req.body.winner;
-
-  res.send('Posted data!');
+  connection.query('SELECT * FROM users', function (error, results){
+    console.log(results);
+    res.send('Posted data!');
+  })
 });
 
 //============ route middleware to make sure a user is logged in =============/
