@@ -7,22 +7,29 @@ export default class Betting extends React.Component {
     super();
     this.state = {
       numStars: 0,
+      currUser: '',
       username: '',
       description: '',
-      winner: '',
-      currUser: props.currentUser.username
+      winner: ''
     };
-    console.log("state: " + this.state);
+    //console.log(props.currentUser);
+    //console.log("state: " + this.state);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleStarsChange = this.handleStarsChange.bind(this);
     this.handleDescChange = this.handleDescChange.bind(this);
     this.handleWinnerChange = this.handleWinnerChange.bind(this);
+    this.handleCurrChange = this.handleCurrChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleUsernameChange(event) {
     this.setState({username: event.target.value});
     console.log(this.state.username);
+  }
+
+  handleCurrChange(event) {
+    this.setState({currUser: event.target.value});
+    console.log(this.state.currUser);
   }
 
   handleStarsChange(event) {
@@ -49,9 +56,9 @@ export default class Betting extends React.Component {
       contentType: "application/json",
       type: 'POST',
       url: "/betting",
-      success: function(data) {
-        console.log("data: " + data);
-      }
+      // success: function(data) {
+      //   console.log("data: " + data);
+     // }
     });
    // console.log(this.state);
    // console.log('Submitted!');
@@ -67,6 +74,10 @@ export default class Betting extends React.Component {
         Enter the information below to place a bet and jump to the top of the leaderboard!
         </p>
         <form onSubmit={this.handleSubmit}>
+        <label>
+          Username of Challenger:
+          <input type="text" value={this.state.currUser} onChange={this.handleCurrChange} />
+        </label>
         <label>
           Username of Competitor:
           <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />

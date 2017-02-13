@@ -79,12 +79,20 @@ app.get('/testing', isLoggedIn, function(req, res) {
 });
 
 app.post('/betting', function(req, res) {
-  console.log(req.body);
-  var winner = req.body.winner;
-  connection.query('SELECT * FROM users', function (error, results){
-    console.log(results);
-    res.send('Posted data!');
-  })
+  //console.log("curr: " + req.body.currUser);
+  var challenger = req.body.currUser;
+  var competitor = req.body.username;
+  var winner = req.body.username;
+  var loser;
+  if(winner === challenger) loser = competitor;
+  else loser = challenger;
+  connection.query('SELECT stars.id FROM `stars` INNER JOIN `users` ON users.id = stars.id_users WHERE users.username = ?', [loser], function (error, results){
+    console.log("challenger:"+  results);
+    connection.query('SELECT * FROM `stars` INNER JOIN `users` ON users.id = stars.id_users WHERE users.username = ?', [competitor], function (error, res2){
+      console.log("competitor: " + res2);
+      res.send('Posted data!');
+    });
+  });
 });
 
 //============ route middleware to make sure a user is logged in =============/
