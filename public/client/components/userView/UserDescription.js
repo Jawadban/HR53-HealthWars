@@ -24,9 +24,10 @@ export default class UserDescription extends React.Component {
 
   render() {
     return (
-      <div id='UserDescription'>
-        <div id='username'><h3>{this.state.name}</h3></div>
-        <div id='team'>Team: {this.state.team}</div>
+      <div>
+        <h2>Welcome, {this.state.name} <small>{this.state.team}</small></h2>
+
+        <hr />
 
       </div>
 

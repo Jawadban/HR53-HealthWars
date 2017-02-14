@@ -24,3 +24,6 @@ dist/
 node_modules/
 bower_components/
 *.log
+
+#private folder for auth keys
+keys/

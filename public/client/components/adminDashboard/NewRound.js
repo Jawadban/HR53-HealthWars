@@ -7,87 +7,47 @@ import { ButtonToolbar, DropdownButton, NavDropdown, MenuItem } from 'react-boot
 export default class NewRound extends React.Component {
 
   constructor() {
-
     super();
-
-    this.state = {exercises: []};
-
-    this.newRound = this.newRound.bind(this);
-  }
-
-  addData(item) {
-    var currentData = this.state.exercises;
-    currentData.push(item);
-    this.setState({
-      exercises: currentData
-    });
-  }
-
-
-  componentDidMount() {
-    var context = this;
-
-    axios.get('/api/exercises').then(function(res) {
-      res.data.forEach(function(exercise) {
-        context.addData(exercise.name);
-      });
-
-      // console.log(context.state);
-    });
-
-  }
-
-
-  // Manually initiate a new round
-  newRound(e) {
-    e.preventDefault();
-
-    var roundObj = {
-      'name': this.refs.name.value,
-      'exercise': this.refs.exercise.value
+    this.state = {
+      exercises: [],
     };
 
-    var context = this;
-
-    axios.post('/api/rounds', roundObj)
-    .then(function(res) {
-      // console.log('Next round initiated!');
-      alert('Next round initiated!');
-      context.refs.name.value = '';
-      context.refs.exercise.value = '';
-
-      // add a new element to every user's scores array for the new round
-      axios.post('/api/users/newround');
-      console.log('Adding new round score value to all users!');
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    var context = this;
+    axios.post('/api/rounds', {
+      'name': this.refs.name.value, 
+      'id_exercises': this.refs.exercise_id.value
+    }).then(function(res) {
+      alert('NEW COMPETITION SUBMITTED!');
+      context.props.updateData();
+    });
+  }
 
   render() {
+
     return (
-        <div className='admin-form' id='newround'>
-          <p>Initiate Next Round</p>
-          <form className="form" onSubmit={this.newRound}>
-            <h5>Round Name:</h5>
-            <input type="text" className="form-control" name="name" placeholder="Round Name" ref="name" /><br />
-            <h5>Exercise:</h5>
+        <div className='admin-form' id='newround' onSubmit={this.handleSubmit}>
+          
+          <form className="form" >
+        
+            <input type="text" className="form-control" name="name" placeholder="Round Name" ref="name" />
+          
 
-
-            <select className="exercise-dropdown" name="exercise" form='newround' ref="exercise" >
-              { this.state.exercises.map((exercise, i) =>
-              <option key={i} value={exercise.toString()}>{exercise}</option>
+            <select className="exercise-dropdown form-control" name="exercise" form='newround' ref="exercise_id" >
+              { this.props.exercises.map((exercise, i) =>
+              <option key={i} value={exercise.id}>{exercise.name}</option>
               ) }
-            </select><br /><br />
-
-
+            </select>
 
             <button className="btn btn-primary admin-button" type="submit" value="Add User">Start Next Round</button>
-          </form><br />
+          </form>
         </div>
     )
+ 
+    
   }
 }

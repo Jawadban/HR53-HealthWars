@@ -1,9 +1,9 @@
 html {
-	background-color: #d1ecff;
+	background-color: #fff;
 }
 
 body {
-	background-color: #d1ecff;
+	background-color: #fff;
   color: #000;
 }
 
@@ -86,7 +86,6 @@ body {
 }
 
 .table {
-  width: 65%;
   margin: 0px auto;
   float: none;
 }
@@ -102,7 +101,7 @@ body {
 }
 
 th {
-	font-size: 24px;
+	font-size: 18px;
 }
 
 .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group {
@@ -110,14 +109,14 @@ th {
 }
 
 .texttd {
-	font-size: 18px;
-	padding: 6px;
+	font-size: 14px;
+	padding: 5px;
 	text-align: left;
 }
 
 .navbar-default {
-	background-color: #1b5188;
-  border-color: #364584;
+	background-color: #333;
+  border-color: #666;
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -181,4 +180,31 @@ table {
   padding-top: 6px;
   padding-left: 10px;
   font-size: 24px;
+}
+
+label {
+  display: block;
+}
+
+iframe {
+  display: block;
+  margin-top: 30px;
+}
+
+.auth {
+
+}
+.auth h1 {
+  margin: 100px 0 20px;
+  color: #333;
+}
+
+table .user {
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 20%;
+}
+
+.main {
+  margin-bottom: 20px;
 }

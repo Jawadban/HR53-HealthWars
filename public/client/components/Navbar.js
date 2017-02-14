@@ -15,12 +15,15 @@ export default class NavigationBar extends React.Component {
         <Navbar.Collapse>
           <Nav>
             <NavItem eventKey={1} href="#/user">Profile</NavItem>
-            <NavItem eventKey={2} href="#/overview">Overview</NavItem>
-            <NavItem eventKey={3} href="#/exercise">Exercise!</NavItem>
+            <NavItem eventKey={2} href="#/overview">Leaderboard</NavItem>
+            <NavItem eventKey={3} href="#/exercise">Exercise</NavItem>
             <NavItem eventKey={4} href="#/admin">Admin Dashboard</NavItem>
+            <NavItem eventKey={5} href="#/slack">Slack</NavItem>
+            <NavItem eventKey={6} href="#/calendar">Calendar</NavItem>
+            <NavItem eventKey={7} href="#/betting">Betting</NavItem>
           </Nav>
           <Nav pullRight>
-            <NavItem eventKey={1} href="#">Logout</NavItem>
+            <NavItem eventKey={1} onClick={this.props.authLogout}>Logout</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
